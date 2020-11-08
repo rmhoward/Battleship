@@ -40,6 +40,22 @@ public class Ship {
     }
 
     boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+        int shipLength = this.getLength();
+        Ship[][] shipArrray = ocean.getShipArray();
+
+        if (horizontal) {
+            int stern = column - (shipLength - 1);
+            if (stern < 0) {
+                return false;
+            }
+
+            if ((column + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+                if (!this.isEmpty(shipArray[row][column+1])) {
+                    return false;
+                }
+            }
+            if ((row - 1) >= 0) {
+        }
     }
 
     void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
