@@ -2,7 +2,11 @@ package battleship;
 
 public class Battleship extends Ship {
 
-    public Battleship {
+	
+    public Battleship(int length) {
+    	
+    	super(length);
+    	
         this.length = 4;
     }
 

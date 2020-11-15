@@ -1,7 +1,9 @@
 package battleship;
 
-public class Ship {
+public abstract class Ship {
 
+	//instance vars
+	
     private int bowRow;
 
     private int bowColumn;
@@ -12,35 +14,30 @@ public class Ship {
 
     private boolean[] hit;
 
-    public Ship(int length) {
+    
+    //abstract methods
+    
+    public abstract String getShipType();   
+    
+    
+    //public methods
+    
+    public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
     }
 
-    public int getBowRow() {
+    public boolean shootAt(int row, int column) {
     }
 
-    public int getBowColumn() {
+    public boolean isSunk() {
     }
-
-    public boolean[] getHit() {
-    }
-
+    
     public boolean isHorizontal() {
     }
-
-    public void setBowRow(int row) {
-    }
-
-    public void setBowColumn(int column) {
-    }
-
-    public void setHorizontal(boolean horizontal) {
-    }
-
-    public abstract String getShipType() {
-    }
-
+    
     boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+    	
         int shipLength = this.getLength();
+        
         Ship[][] shipArrray = ocean.getShipArray();
 
         if (horizontal) {
@@ -53,22 +50,56 @@ public class Ship {
                 if (!this.isEmpty(shipArray[row][column+1])) {
                     return false;
                 }
-            }
-            if ((row - 1) >= 0) {
-        }
+            } if ((row - 1) >= 0) {
+            	return true;
+            	}
     }
 
-    void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+
+    //constructors
+    
+    public Ship(int length) {
+    	this.length = length;
     }
 
-    boolean shootAt(int row, int column) {
+    
+    //getters/setters
+    
+    public int getLength() {
+    	return length;
+    }
+    
+    public int getBowRow() {
+    	return bowRow;
     }
 
-    boolean isSunk() {
+    public int getBowColumn() {
+    	return bowColumn;
+    }
+    
+
+    public boolean[] getHit() {
+    	return hit;
     }
 
+    public void setBowRow(int row) {
+    	this.bowRow = row;
+    }
+
+    public void setBowColumn(int column) {
+    	this.bowColumn = column;
+    }
+
+    public void setHorizontal(boolean horizontal) {
+    	this.horizontal = horizontal;
+    }
+    
+    
+    //override methods
+    
     @Override
     public String toString() {
+    	return null;
     }
 
 
