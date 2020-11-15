@@ -13,13 +13,16 @@ public class EmptySea extends Ship {
     boolean isSunk() {
     }
 
+
+
+    //getters/setters
+    
+    @Override
+    public String getShipType() {
+    	return this.getShipType();
+    }
+
     @Override
     public String toString() {
     }
-
-    @Override
-    public String getShipType() {
-    }
-
-
 }

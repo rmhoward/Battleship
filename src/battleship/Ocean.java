@@ -1,22 +1,31 @@
 package battleship;
 
+import java.util.Random;
+
 public class Ocean {
 
+	//static vars
+	
     static final int OCEAN_SIZE = 10;
-
-    private Ship[][]ships = new Ship[Ocean.OCEAN_SIZE][Ocean.OCEAN_SIZE];
-
     static final int NUM_BATTLESHIPS = 1;
     static final int NUM_CRUISERS = 2;
     static final int NUM_DESTROYERS = 3;
     static final int NUM_SUBMARINES = 4;
 
+    //private vars
+    
+    private Ship[][]ships = new Ship[Ocean.OCEAN_SIZE][Ocean.OCEAN_SIZE];
+    
     private int shotsFired;
 
     private int hitCount;
 
     private int shipsSunk;
+    
+    private boolean horizontal;
 
+    //constructors
+    
     public Ocean() {
         this.populateEmptyOcean();
         this.shotsFired = 0;
@@ -24,7 +33,9 @@ public class Ocean {
         this.shipsSunk = 0;
     }
 
-    //Create ocean with no shops
+    //private methods
+    
+    //Create ocean with no shots
     private void populateEmptyOcean() {
         for (int i = 0; i < this.ships.length; i++) {
             for (int j = 0; j < this.ships[i].length; j++) {
@@ -33,10 +44,16 @@ public class Ocean {
             }
         }
     }
+    
+    
+    //public methods
+    
     void placeAllShipsRandomly() {
 
         Random rand = new Random();
+        
         int row;
+        
         int column;
 
         //place battleships
@@ -98,21 +115,30 @@ public class Ocean {
     }
 
     boolean isOccupied(int row, int column) {
+    	
     }
 
     boolean shootAt(int row, int column) {
+    	
     }
 
+    
+    //getters/setters
+    
     int getShotsFired() {
+    	return this.shotsFired;
     }
 
     int getHitCount() {
+    	return this.hitCount;
     }
 
     int getShipsSunk() {
+    	return this.shipsSunk;
     }
 
     Ship[][] getShipArray() {
+    	return shipArray;
     }
 
     void print() {
