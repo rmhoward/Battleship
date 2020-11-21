@@ -1,10 +1,13 @@
 package battleship;
 
+import java.util.Scanner;
+
 public class BattleshipGame {
 	
 	
 	public static void main(String[] args) {
-		Ocean ocean = new Ocean;
+		Ocean ocean = new Ocean();
+		
 		ocean.placeAllShipsRandomly();
 
 		Scanner scanner = new Scanner(System.in);
@@ -29,12 +32,15 @@ public class BattleshipGame {
 				//fire a shot
 				boolean shootSuccess = ocean.shootAt(row, column);
 
-			}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+//				e.printStackTrace();
+				
+				//prints custom error message from withdraw message
+				System.out.println(e.getMessage());
+			} 
 		}
 	}
-	
-	
-	
 	
 }
 

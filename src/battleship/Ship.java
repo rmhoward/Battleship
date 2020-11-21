@@ -25,12 +25,15 @@ public abstract class Ship {
     }
 
     public boolean shootAt(int row, int column) {
+    	return true;
     }
 
     public boolean isSunk() {
+    	return true;
     }
     
     public boolean isHorizontal() {
+    	return true;
     }
     
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
