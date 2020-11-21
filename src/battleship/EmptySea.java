@@ -2,7 +2,11 @@ package battleship;
 
 public class EmptySea extends Ship {
 
+	private int length;
+	
+	
     public EmptySea() {
+    	super(length);
     }
 
     @Override
@@ -24,5 +28,6 @@ public class EmptySea extends Ship {
 
     @Override
     public String toString() {
+    	return "Empty Sea";
     }
 }

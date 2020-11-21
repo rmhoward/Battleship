@@ -7,13 +7,13 @@ public abstract class Ship {
     private int bowRow;
 
     private int bowColumn;
-
+    
     private int length;
 
     private boolean horizontal;
 
     private boolean[] hit;
-
+    
     
     //abstract methods
     
@@ -34,7 +34,7 @@ public abstract class Ship {
     public boolean isHorizontal() {
     }
     
-    boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+    public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
     	
         int shipLength = this.getLength();
         
@@ -53,7 +53,8 @@ public abstract class Ship {
             } if ((row - 1) >= 0) {
             	return true;
             	}
-    }
+        } 
+      } 
 
 
     //constructors

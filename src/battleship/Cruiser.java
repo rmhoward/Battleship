@@ -9,6 +9,7 @@ public class Cruiser extends Ship {
         this.length = 3;
     }
 
+    @Override
     public String getShipType() {
         return "Cruiser";
     }
