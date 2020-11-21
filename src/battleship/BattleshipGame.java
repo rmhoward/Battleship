@@ -13,8 +13,10 @@ public class BattleshipGame {
 
 			ocean.print();
 
-			System.out.print("Enter row,column:");
+			System.out.print("Enter row,column: ");
+			
 			String rowColPair = scanner.nextLine();
+			
 			String[] rowColPairArray = rowColPair.split(",");
 
 			String rowStr = rowColPairArray[0].trim();

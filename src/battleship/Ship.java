@@ -12,7 +12,7 @@ public abstract class Ship {
 
     private boolean horizontal;
 
-    private boolean[] hit
+    private boolean[] hit;
       
     //abstract methods
     
@@ -37,7 +37,7 @@ public abstract class Ship {
     	
         int shipLength = this.getLength();
         
-        Ship[][] shipArrray = ocean.getShipArray();
+        Ship[][] shipArray = ocean.getShipArray();
 
         if (horizontal) {
             int stern = column - (shipLength - 1);
@@ -46,13 +46,14 @@ public abstract class Ship {
             }
 
             if ((column + 1) <= (Ocean.OCEAN_SIZE - 1)) {
-                if (!this.isEmpty(shipArray[row][column+1])) {
+                if (!"empty".equals(shipArray[row][column+1].getShipType())) {
                     return false;
                 }
             } if ((row - 1) >= 0) {
             	return true;
             	}
-        } 
+        }
+		return false; 
       } 
 
 
