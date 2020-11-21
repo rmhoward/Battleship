@@ -1,17 +1,14 @@
 package battleship;
 
 public class EmptySea extends Ship {
-
-	private int length;
-	
 	
     public EmptySea() {
-    	super(length);
+    	super(1);
     }
 
     //overrides shootAt if nothing was hit
     @Override
-    boolean shootAt(int row, int column) {
+    public boolean shootAt(int row, int column) {
 
         //call shootAt from Ship to populate hit array if they shoot at empty sea
         super.shootAt(row,column);
@@ -21,7 +18,7 @@ public class EmptySea extends Ship {
 
     //overrides isSunk if nothing is sunk
     @Override
-    boolean isSunk() {
+    public boolean isSunk() {
         return false;
     }
 
@@ -29,7 +26,7 @@ public class EmptySea extends Ship {
     //getters/setters
     @Override
     public String getShipType() {
-        return this.getShipType();
+        return "empty";
     }
 
 

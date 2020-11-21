@@ -58,7 +58,7 @@ public class Ocean {
 
         //place battleships
         for (int i = 0; i < Ocean.NUM_BATTLESHIPS; i++) {
-            Ship battleship = new Battleship();
+            Ship battleship = new Battleship(4);
             row = rand.nextInt(10);
             column = rand.nextInt(10);
             horizontal = rand.nextInt(2) == 0 ? false : true;
@@ -72,7 +72,7 @@ public class Ocean {
 
         //place cruisers
         for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
-            Ship cruiser = new Cruiser();
+            Ship cruiser = new Cruiser(3);
             row = rand.nextInt(10);
             column = rand.nextInt(10);
             horizontal = rand.nextInt(2) == 0 ? false : true;
@@ -86,7 +86,7 @@ public class Ocean {
 
         //place destroyers
         for (int i = 0; i < Ocean.NUM_DESTROYERS; i++) {
-            Ship destroyer = new Destroyer();
+            Ship destroyer = new Destroyer(2);
             row = rand.nextInt(10);
             column = rand.nextInt(10);
             horizontal = rand.nextInt(2) == 0 ? false : true;
@@ -100,7 +100,7 @@ public class Ocean {
 
         //place submarines
         for (int i = 0; i < Ocean.NUM_SUBMARINES; i++) {
-            Ship submarine = new Submarine();
+            Ship submarine = new Submarine(1);
             row = rand.nextInt(10);
             column = rand.nextInt(10);
             horizontal = rand.nextInt(2) == 0 ? false : true;
@@ -122,6 +122,7 @@ public class Ocean {
 
 
     boolean shootAt(int row, int column) {
+    	
     	boolean returnVal = false;
 
     	//row or col out of bounds
@@ -133,7 +134,7 @@ public class Ocean {
             if (ship.shootAt(row, column)) {
                 this.hitCount++;
 
-                if ship.isSunk() {
+                if (ship.isSunk()) {
                     this.shipsSunk++;
                 }
             }

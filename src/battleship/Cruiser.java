@@ -1,12 +1,13 @@
 package battleship;
 
 public class Cruiser extends Ship {
+	
+	private static final int shipLength = 3;
 
     public Cruiser(int length) {
     	
-    	super(length);
-    	
-        this.length = 3;
+    	super(shipLength);
+
     }
 
     @Override
