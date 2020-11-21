@@ -115,8 +115,11 @@ public class Ocean {
     }
 
     boolean isOccupied(int row, int column) {
-    	
+    	Ship[][] shipArray = this.getShipArray();
+
+    	return !("empty".equals(shipArray[row][column].getShipType()));
     }
+
 
     boolean shootAt(int row, int column) {
     	boolean returnVal = false;
