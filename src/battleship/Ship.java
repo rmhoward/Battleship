@@ -12,9 +12,8 @@ public abstract class Ship {
 
     private boolean horizontal;
 
-    private boolean[] hit;
-    
-    
+    private boolean[] hit
+      
     //abstract methods
     
     public abstract String getShipType();   
@@ -61,6 +60,9 @@ public abstract class Ship {
     
     public Ship(int length) {
     	this.length = length;
+
+    	//set hit tracker to size 4
+    	this.hit = new boolean[4];
     }
 
     

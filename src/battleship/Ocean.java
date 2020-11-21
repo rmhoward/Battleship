@@ -115,11 +115,37 @@ public class Ocean {
     }
 
     boolean isOccupied(int row, int column) {
-    	
+    	Ship[][] shipArray = this.getShipArray();
+
+    	return !("empty".equals(shipArray[row][column].getShipType()));
     }
 
+
     boolean shootAt(int row, int column) {
-    	
+    	boolean returnVal = false;
+
+    	//row or col out of bounds
+        Ship[][] shipArray = this.getShipArray();
+        Ship ship = shipArray[row][column];
+
+        //if not sunk
+        if (!ship.isSunk()) {
+            if (ship.shootAt(row, column)) {
+                this.hitCount++;
+
+                if ship.isSunk() {
+                    this.shipsSunk++;
+                }
+            }
+            //if ship
+            if (this.isOccupied(row, column)) {
+                returnVal = true;
+            }
+        }
+        //increase shots fired total
+        this.shotsFired++;
+
+        return returnVal;
     }
 
     
@@ -137,8 +163,14 @@ public class Ocean {
     	return this.shipsSunk;
     }
 
+    //check if game is over (all ships sunk)
+    boolean isGameOver() {
+        return this.getShipsSunk() >= Ocean.OCEAN_SIZE;
+    }
+
+    //return ship array
     Ship[][] getShipArray() {
-    	return shipArray;
+    	return this.ships;
     }
 
     void print() {
