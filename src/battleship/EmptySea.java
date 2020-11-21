@@ -29,7 +29,7 @@ public class EmptySea extends Ship {
     //getters/setters
     @Override
     public String getShipType() {
-    	return this.getShipType();
+        return this.getShipType();
     }
 
 
