@@ -2,7 +2,11 @@ package battleship;
 
 public class EmptySea extends Ship {
 
+	private int length;
+	
+	
     public EmptySea() {
+    	super(length);
     }
 
     //overrides shootAt if nothing was hit
