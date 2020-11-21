@@ -163,8 +163,14 @@ public class Ocean {
     	return this.shipsSunk;
     }
 
+    //check if game is over (all ships sunk)
+    boolean isGameOver() {
+        return this.getShipsSunk() >= Ocean.OCEAN_SIZE;
+    }
+
+    //return ship array
     Ship[][] getShipArray() {
-    	return shipArray;
+    	return this.ships;
     }
 
     void print() {
