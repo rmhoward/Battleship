@@ -22,6 +22,7 @@ public abstract class Ship {
     //public methods
     
     public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+    	
     }
 
     public boolean shootAt(int row, int column) {
@@ -33,7 +34,11 @@ public abstract class Ship {
     }
     
     public boolean isHorizontal() {
-    	return true;
+    	if (this.horizontal == true) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
     
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
@@ -41,22 +46,67 @@ public abstract class Ship {
         int shipLength = this.getLength();
         
         Ship[][] shipArray = ocean.getShipArray();
-
+        
+        
+        
+        // CHECK THIS:
+        // on end points (first and final points) runs isOccupied() in this order: Current point, one in front/behind, diagonal1, diagonal2, below, above
+        // on mid points runs isOccupied in this order: current point, below, above
         if (horizontal) {
-            int stern = column - (shipLength - 1);
-            if (stern < 0) {
-                return false;
-            }
-
-            if ((column + 1) <= (Ocean.OCEAN_SIZE - 1)) {
-                if (!"empty".equals(shipArray[row][column+1].getShipType())) {
-                    return false;
-                }
-            } if ((row - 1) >= 0) {
-            	return true;
-            	}
+        	for (int i = 0; i >= shipLength; i++) {
+        		if (i == 0) {
+        			if (ocean.isOccupied(row, column) || ocean.isOccupied(row, column + 1) || ocean.isOccupied(row - 1, column + 1) || ocean.isOccupied(row + 1, column + 1)|| ocean.isOccupied(row + 1, column) || ocean.isOccupied(row - 1, column)) {
+        				return false;
+        			} 
+        		} else if (i == shipLength) {
+        			if (ocean.isOccupied(row, column - shipLength + 1) || ocean.isOccupied(row, column - shipLength) || ocean.isOccupied(row + 1, column - shipLength) || ocean.isOccupied(row - 1, column - shipLength) ||  ocean.isOccupied(row + 1, column - shipLength + 1) || ocean.isOccupied(row - 1, column - shipLength + 1)) {
+        				return false;
+        			}
+        		} else {
+        			if (ocean.isOccupied(row, column - i) || ocean.isOccupied(row + 1, column - i) || ocean.isOccupied(row - 1, column - i)) {
+        				return false;
+        			}
+        		}
+        	}
+        
+        	// Vertical implementation.
+        	// on end points runs isOccupied() in following order: Current point, one above/below, diagonal1, diagonal2, right, left
+        	// on mid points runs isOccupied in this order: current point, right, left
+        } else {
+        	for (int i = 0; i >= shipLength; i++) {
+        		if (i == 0) {
+        			if (ocean.isOccupied(row, column) || ocean.isOccupied(row + 1, column) || ocean.isOccupied(row + 1, column - 1) || ocean.isOccupied(row + 1, column + 1)|| ocean.isOccupied(row, column + 1) || ocean.isOccupied(row, column - 1)) {
+        				return false;
+        			} 
+        		} else if (i == shipLength) {
+        			if (ocean.isOccupied(row  - shipLength + 1, column) || ocean.isOccupied(row  - shipLength, column) ||  ocean.isOccupied(row  - shipLength, column + 1) || ocean.isOccupied(row  - shipLength, column - 1) ||  ocean.isOccupied(row  - shipLength + 1, column + 1) || ocean.isOccupied(row - shipLength + 1, column - 1)) {
+        				return false;
+        			}
+        		} else {
+        			if (ocean.isOccupied(row - i, column) || ocean.isOccupied(row -i, column + 1) || ocean.isOccupied(row - i, column - 1)) {
+        				return false;
+        			}
+        		}
+        	}
         }
-		return false; 
+        
+        return true;
+//
+//        if (horizontal) {
+//            int stern = column - (shipLength - 1);
+//            if (stern < 0) {
+//                return false;
+//            }
+//
+//            if ((column + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+//                if (!"empty".equals(shipArray[row][column+1].getShipType())) {
+//                    return false;
+//                }
+//            } if ((row - 1) >= 0) {
+//            	return true;
+//            	}
+//        }
+//		return false; 
       } 
 
 
