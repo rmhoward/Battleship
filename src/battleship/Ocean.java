@@ -14,7 +14,7 @@ public class Ocean {
 
     //private vars
     
-    private Ship[][]ships = new Ship[Ocean.OCEAN_SIZE][Ocean.OCEAN_SIZE];
+    private Ship[][]ships = new Ship[Ocean.OCEAN_SIZE + 1][Ocean.OCEAN_SIZE];
     
     private int shotsFired;
 
@@ -83,6 +83,19 @@ public class Ocean {
             }
             cruiser.placeShipAt(row, column, horizontal, this);
         }
+        
+        for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
+            Ship cruiser2 = new Cruiser(3);
+            row = rand.nextInt(10);
+            column = rand.nextInt(10);
+            horizontal = rand.nextInt(2) == 0 ? false : true;
+            while(!cruiser2.okToPlaceShipAt(row, column, horizontal, this)) {
+                row = rand.nextInt(10);
+                column = rand.nextInt(10);
+                horizontal = rand.nextInt(2) == 0 ? false : true;
+            }
+            cruiser2.placeShipAt(row, column, horizontal, this);
+        }
 
         //place destroyers
         for (int i = 0; i < Ocean.NUM_DESTROYERS; i++) {
@@ -111,6 +124,8 @@ public class Ocean {
             }
             submarine.placeShipAt(row, column, horizontal, this);
         }
+        
+        
 
     }
 
@@ -175,6 +190,25 @@ public class Ocean {
     }
 
     void print() {
+		for (int i = 0; i <= 10; i++) {
+			if (i == 0) {
+				System.out.print(" ");
+			} else if (i == 1) {
+				System.out.print(0);
+			} else {
+				System.out.print(i-1);
+			}
+			for (int j = 0; j < 10; j++) {
+				if (i == 0) {
+					System.out.print(j);
+				} else {
+					System.out.print(ships[i][j]);
+				}
+				
+				
+			}
+			System.out.println(' ');
+		}
     }
 
 }
