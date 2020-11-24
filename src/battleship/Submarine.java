@@ -12,6 +12,7 @@ public class Submarine extends Ship {
 	 */
 	private static final int shipLength = 1;
 	
+
     /**
      * @param the length of the Submarine
      * @return the Submarine length
