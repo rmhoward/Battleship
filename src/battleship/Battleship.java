@@ -16,6 +16,7 @@ public class Battleship extends Ship {
 	 * Battleship has a shipLength of 4.
 	 * The bow will always face the right of the gameboard
 	 */
+
     public Battleship(int length) {
     	
     	super(shipLength);

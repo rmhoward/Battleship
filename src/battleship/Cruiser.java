@@ -15,6 +15,7 @@ public class Cruiser extends Ship {
 	 * Cruiser has a shipLength of 3.
 	 * The bow will always face the right of the gameboard.
 	 */
+
     public Cruiser(int length) {
     	
     	super(shipLength);
