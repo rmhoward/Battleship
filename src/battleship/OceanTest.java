@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Java tests for the Javacript game.
+ * Tests proper game initiation, board setup, and functioning of ships. 
+ */
 class OceanTest {
 
 	Ocean ocean;
@@ -20,6 +24,10 @@ class OceanTest {
 		ocean = new Ocean();
 	}
 	
+	/**
+	 * Iterates over all of the grid locations to ensure they are empty at the start of the game. 
+	 * Each of the grid lcoations should be equal to "empty" which is the EmptySea's "getShipType" override. 
+	 */
 	@Test
 	void testEmptyOcean() {
 		
@@ -45,6 +53,11 @@ class OceanTest {
 		assertEquals(0, ships[9][0].getBowColumn());
 	}
 	
+	/**
+	 * Iterates over all of the grid locations to determine if the correct number of each type of ships have been placed on the game board.
+	 * Once ships are identified the ship variables (ints) are incremented. 
+	 * This test checks the ship count against the ship variables to ensure there are the proper amount.  
+	 */
 	@Test
 	void testPlaceAllShipsRandomly() {
 		
@@ -100,6 +113,11 @@ class OceanTest {
 		assertEquals(totalSpaces - occupiedSpaces, numEmptySeas);
 	}
 
+	/**
+	 * Test to determine if ship placement works correctly. 
+	 * Places a destroyer at 1,5 and checks to see whether it is there. 
+	 * Places a submarine at 0,0
+	 */
 	@Test
 	void testIsOccupied() {
 
@@ -120,7 +138,11 @@ class OceanTest {
 		//TODO
 		//More tests
 	}
-
+	
+	/**
+	 * Tests to ensure the ShootAt method is functioning properly. 
+	 * Places a Destroyer at a particular grid location
+	 */
 	@Test
 	void testShootAt() {
 	
@@ -139,7 +161,11 @@ class OceanTest {
 		//TODO
 		//More tests
 	}
-
+	
+	/**
+	 * Tests whether the shots fired method consistenly returns false before ships are placed.
+	 * Next a Destroyer is placed on the game board and the test whether the GetShotsFired method returns True when called against a grid location with a ship.
+	 */
 	@Test
 	void testGetShotsFired() {
 		
@@ -171,7 +197,9 @@ class OceanTest {
 		//TODO
 		//More tests
 	}
-
+	/**
+	 * Test to determine whether the appropriate number of hits are attributed to a particular ship. 
+	 */
 	@Test
 	void testGetHitCount() {
 		
@@ -188,7 +216,12 @@ class OceanTest {
 		//TODO
 		//More tests
 	}
-	
+	/**
+	 * Test to confirm whether the GestShipsSunk method works properly. 
+	 * Creates a destroyer than runs the method shootAt against a portion of the destroyer.
+	 * Should return False after running the isSunk method.
+	 * Should return the appropriate hit count after running the getHitCount method. 
+	 */
 	@Test
 	void testGetShipsSunk() {
 		
@@ -206,7 +239,10 @@ class OceanTest {
 		//TODO
 		//More tests
 	}
-
+	
+	/**
+	 * Tests to determine the array value or placementof a particular ship
+	 */
 	@Test
 	void testGetShipArray() {
 		
