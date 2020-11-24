@@ -21,7 +21,51 @@ public abstract class Ship {
     
     //public methods
     
+    
+    // THIS ISN'T RIGHT, BUT I CAN'T FIGURE IT OUT RIGHT NOW, PLEASE REVISE.
     public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+    	
+    	int shipLength = this.length;
+    	
+    	Ship[][] shipArray = ocean.getShipArray();
+    	
+    	this.bowRow = row;
+		this.bowColumn = column;
+		
+		//if horizontal,  put point at row/column, then column -1 for length of ship
+    	if (horizontal) {
+    		
+    		this.horizontal = true;
+    		
+    		for (int i = 0; i < shipLength; i++) {
+    			if (shipLength == 1) {
+    				shipArray[row][column - i] = new Submarine();
+    			} else if (shipLength == 2) {
+    				shipArray[row][column - i] = new Destroyer();
+    			} else if (shipLength == 3) {
+    				shipArray[row][column - i] = new Cruiser();
+    			} else  {
+    				shipArray[row][column - i] = new Battleship();
+    			}
+    		}
+    	
+    	//if vertical, put points, then -1 to row for length of ship	
+    	} else {
+    		this.horizontal = false;
+    		for (int i = 0; i < shipLength; i++) {
+    			if (shipLength == 1) {
+    				shipArray[row][column - i] = new Submarine();
+    			} else if (shipLength == 2) {
+    				shipArray[row][column - i] = new Destroyer();
+    			} else if (shipLength == 3) {
+    				shipArray[row][column - i] = new Cruiser();
+    			} else  {
+    				shipArray[row][column - i] = new Battleship();
+    			}
+    		}
+    	}
+    	
+    	
     	
     }
 
@@ -41,11 +85,42 @@ public abstract class Ship {
     	}
     }
     
+    
+    //HELPER METHOD TO CHECK IF IN GRID (tries to place in the grid, if a error is thrown OR the number , it will return false)
+    public boolean checkOffGrid(int row, int column, boolean horizontal, Ocean ocean) {
+    	
+    	
+    	int shipLength = this.getLength();
+        
+        try {
+        	if (row ==  0 || column == 0) {
+        		return false;
+        	} else if (horizontal) {
+        		for (int i =  0; i < shipLength; i++) {
+        			column -= 1;
+        			if (column == 0) {
+        				return false;
+        			} 
+        		}
+        	} else {
+        		for (int i =  0; i < shipLength; i++) {
+        			row -= 1;
+        			if (row == 0) {
+        				return false;
+        			} 
+        		}
+        	}
+        } catch (Exception e) {
+        	return false;
+        }
+    	return true;
+    }
+    
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
     	
         int shipLength = this.getLength();
         
-        Ship[][] shipArray = ocean.getShipArray();
+        
         
         
         
@@ -134,11 +209,11 @@ public abstract class Ship {
     	return bowColumn;
     }
     
-
     public boolean[] getHit() {
     	return hit;
     }
 
+    
     public void setBowRow(int row) {
     	this.bowRow = row;
     }
