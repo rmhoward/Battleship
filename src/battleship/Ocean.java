@@ -36,6 +36,8 @@ public class Ocean {
     //private methods
     
     //Create ocean with no shots
+    
+    //CHANGE, ADD EXTRA POINTS
     private void populateEmptyOcean() {
         for (int i = 0; i < this.ships.length; i++) {
             for (int j = 0; j < this.ships[i].length; j++) {
@@ -58,7 +60,7 @@ public class Ocean {
 
         //place battleships
         for (int i = 0; i < Ocean.NUM_BATTLESHIPS; i++) {
-            Ship battleship = new Battleship(4);
+            Ship battleship = new Battleship();
             row = rand.nextInt(10);
             column = rand.nextInt(10);
             horizontal = rand.nextInt(2) == 0 ? false : true;
@@ -72,7 +74,7 @@ public class Ocean {
 
         //place cruisers
         for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
-            Ship cruiser = new Cruiser(3);
+            Ship cruiser = new Cruiser();
             row = rand.nextInt(10);
             column = rand.nextInt(10);
             horizontal = rand.nextInt(2) == 0 ? false : true;
@@ -85,7 +87,7 @@ public class Ocean {
         }
         
         for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
-            Ship cruiser2 = new Cruiser(3);
+            Ship cruiser2 = new Cruiser();
             row = rand.nextInt(10);
             column = rand.nextInt(10);
             horizontal = rand.nextInt(2) == 0 ? false : true;
@@ -99,7 +101,7 @@ public class Ocean {
 
         //place destroyers
         for (int i = 0; i < Ocean.NUM_DESTROYERS; i++) {
-            Ship destroyer = new Destroyer(2);
+            Ship destroyer = new Destroyer();
             row = rand.nextInt(10);
             column = rand.nextInt(10);
             horizontal = rand.nextInt(2) == 0 ? false : true;
@@ -113,7 +115,7 @@ public class Ocean {
 
         //place submarines
         for (int i = 0; i < Ocean.NUM_SUBMARINES; i++) {
-            Ship submarine = new Submarine(1);
+            Ship submarine = new Submarine();
             row = rand.nextInt(10);
             column = rand.nextInt(10);
             horizontal = rand.nextInt(2) == 0 ? false : true;
@@ -192,17 +194,17 @@ public class Ocean {
     void print() {
 		for (int i = 0; i <= 10; i++) {
 			if (i == 0) {
-				System.out.print(" ");
+				System.out.print("  ");
 			} else if (i == 1) {
-				System.out.print(0);
+				System.out.print(0 + " ");
 			} else {
-				System.out.print(i-1);
+				System.out.print(i-1 + " ");
 			}
 			for (int j = 0; j < 10; j++) {
 				if (i == 0) {
-					System.out.print(j);
+					System.out.print(j + " ");
 				} else {
-					System.out.print(ships[i][j]);
+					System.out.print(ships[i][j] + " ");
 				}
 				
 				
