@@ -4,7 +4,7 @@ public class Destroyer extends Ship {
 
 	private static final int shipLength = 2;
 	
-    public Destroyer(int length) {
+    public Destroyer() {
     	
     	super(shipLength);
 
