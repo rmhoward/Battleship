@@ -68,10 +68,29 @@ class OceanTest {
 		Ship[][] ships = ocean.getShipArray();
 		ArrayList<Ship> shipsFound = new ArrayList<Ship>();
 		
+		/**
+		 * Value representing the number of Battleships in the game. 
+		 */
 		int numBattlehips = 0;
+		
+		/**
+		 * Value representing the number of Cruisers in the game. 
+		 */
 		int numCruisers = 0;
+		
+		/**
+		 * Value representing the number of Destroyers in the game. 
+		 */
 		int numDestroyers = 0;
+		
+		/**
+		 * Value representing the number of Submarines in the game. 
+		 */
 		int numSubmarines = 0;
+		
+		/**
+		 * Value representing the number of EmptySea space in the game.
+		 */
 		int numEmptySeas = 0;
 		
 		for (int i = 0; i < ships.length; i++) {
@@ -103,7 +122,14 @@ class OceanTest {
 		assertEquals(NUM_SUBMARINES, numSubmarines);
 		
 		//calculate total number of available spaces and occupied spaces
+		/**
+		 * Determines the total size of the game space by multiplying the ocean size variable by itself. 
+		 */
 		int totalSpaces = OCEAN_SIZE * OCEAN_SIZE; 
+		
+		/**
+		 * Determined by addding the number of spaces occupied by the dum of the length of ships in play. 
+		 */
 		int occupiedSpaces = (NUM_BATTLESHIPS * 4)
 				+ (NUM_CRUISERS * 3)
 				+ (NUM_DESTROYERS * 2)

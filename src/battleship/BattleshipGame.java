@@ -4,7 +4,9 @@ import java.util.Scanner;
 
 public class BattleshipGame {
 	
-	
+	/**
+	 * Main function for Battleship game
+	 */
 	public static void main(String[] args) {
 		Ocean ocean = new Ocean();
 		
@@ -26,10 +28,20 @@ public class BattleshipGame {
 			String colStr = rowColPairArray[1].trim();
 
 			try {
+				/**
+				 * Value representing the row ("x" axis) of the gameboard
+				 */
 				int row = Integer.parseInt(rowStr);
+				
+				/**
+				 * Value representing the column ("y" axis) of the gameboard
+				 */
 				int column = Integer.parseInt(colStr);
 
 				//fire a shot
+				/**
+				 * Boolean determining whethrt the ship has successfully hit. 
+				 */
 				boolean shootSuccess = ocean.shootAt(row, column);
 
 			} catch (Exception e) {
