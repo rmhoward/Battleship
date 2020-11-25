@@ -1,5 +1,8 @@
 package battleship;
 
+/**
+ * Creates the Cruiser class which is an extenion of the Ship class
+ */
 public class Cruiser extends Ship {
 	
 	/**
@@ -7,14 +10,23 @@ public class Cruiser extends Ship {
 	 * Cruiser has a shipLength of 3.
 	 * The bow will always face the right of the gameboard.
 	 */
+
 	private static final int shipLength = 3;
 
-    public Cruiser() {
+    /**
+     * @param the length of the Cruiser
+     * @return the Submarine length
+     */
+
+    public Cruiser(int length) {
     	
     	super(shipLength);
 
     }
 
+    /**
+     * Overrides the ship method to return "Cruiser"
+     */
     @Override
     public String getShipType() {
         return "Cruiser";

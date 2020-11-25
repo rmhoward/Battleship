@@ -2,6 +2,11 @@ package battleship;
 
 import java.util.Random;
 
+/**
+ * The Ocean class represents the game board for Battleship 
+ * Ocean holds the variables for the game including the ocean size, number of battleships, number of cruisers, number of destroyers, and number of submarines. 
+ * Zeros out constructors.
+ */
 public class Ocean {
 
 	//static vars
@@ -36,8 +41,10 @@ public class Ocean {
     //private methods
     
     //Create ocean with no shots
-    
-    //CHANGE, ADD EXTRA POINTS
+
+    /**
+     * Adds emptysea (a subclass of Ship) to the Ocean
+     */
     private void populateEmptyOcean() {
         for (int i = 0; i < this.ships.length; i++) {
             for (int j = 0; j < this.ships[i].length; j++) {
@@ -50,6 +57,9 @@ public class Ocean {
     
     //public methods
     
+    /**
+     * Randomly places all ships in the Ocean/GameBoard. 
+     */
     void placeAllShipsRandomly() {
 
         Random rand = new Random();
@@ -58,8 +68,41 @@ public class Ocean {
 //        
 //        int column;
         
+<<<<<<< HEAD
         //initializes boolean for checking grid suitability checking
         boolean noneOffGrid = false;
+=======
+        int column;
+
+        //place battleships
+        for (int i = 0; i < Ocean.NUM_BATTLESHIPS; i++) {
+            Ship battleship = new Battleship();
+            row = rand.nextInt(10);
+            column = rand.nextInt(10);
+            horizontal = rand.nextInt(2) == 0 ? false : true;
+            while(!battleship.okToPlaceShipAt(row, column, horizontal, this)) {
+                row = rand.nextInt(10);
+                column = rand.nextInt(10);
+                horizontal = rand.nextInt(2) == 0 ? false : true;
+            }
+            battleship.placeShipAt(row, column, horizontal, this);
+        }
+
+        //place cruisers
+        
+        for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
+            Ship cruiser = new Cruiser();
+            row = rand.nextInt(10);
+            column = rand.nextInt(10);
+            horizontal = rand.nextInt(2) == 0 ? false : true;
+            while(!cruiser.okToPlaceShipAt(row, column, horizontal, this)) {
+                row = rand.nextInt(10);
+                column = rand.nextInt(10);
+                horizontal = rand.nextInt(2) == 0 ? false : true;
+            }
+            cruiser.placeShipAt(row, column, horizontal, this);
+        }
+>>>>>>> f13d036abb0045fa2982280f45aad11bc6fbc4b2
         
         //initialize boolean for checking location in relation to other  ships
         boolean locationOkay = false;
@@ -186,14 +229,25 @@ public class Ocean {
         
 
     }
-
+    
+    /**
+     * Determines whether there os currently a ship on a particular grid location. 
+     * Function in support of random ship placement and hit detection of ships
+     * @return whether the grid location is empty. 
+     */
     boolean isOccupied(int row, int column) {
     	Ship[][] shipArray = this.getShipArray();
 
     	return !("empty".equals(shipArray[row][column].getShipType()));
     }
 
-
+    /**
+     * Method for shooting at a ship. 
+     * flags if shot is taken out of game space
+     * Adds a hit counter to a ship if a ship is hit and not sunk. 
+     * If a ship is sunk the isSunk method is called. 
+     * @return returnVal (whether a ship was hit)
+     */
     boolean shootAt(int row, int column) {
     	
     	boolean returnVal = false;
@@ -225,24 +279,41 @@ public class Ocean {
     
     //getters/setters
     
+    /**
+     * Hold the shots fired by a player. 
+     */
     int getShotsFired() {
     	return this.shotsFired;
     }
-
+    /**
+     * Hold the number of hits a ship has taken. 
+     */
     int getHitCount() {
     	return this.hitCount;
     }
-
+    
+    /**
+     * holds the list of ships sunk. 
+     * @return ships sunk. 
+     */
     int getShipsSunk() {
     	return this.shipsSunk;
     }
 
     //check if game is over (all ships sunk)
+    /**
+     * Determines if the game is over by checking to see if all of the ships have been sunk. 
+     * @return boolean of whether ships sunk is greater than or equal to the number of ocean grid locations. 
+     */
     boolean isGameOver() {
         return this.getShipsSunk() >= Ocean.OCEAN_SIZE;
     }
 
     //return ship array
+    /**
+     * Prints the remaining ships. 
+     * @return an array of the remaining ships. 
+     */
     Ship[][] getShipArray() {
     	return this.ships;
     }
