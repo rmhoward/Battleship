@@ -303,9 +303,9 @@ public abstract class Ship {
 	 * Returns whether or not ship is horizontal
 	 * @param true if horizontal, otherwise false
 	 */
-    public boolean isHorizontal() {
-    	return this.horizontal;
-	}
+//    public boolean isHorizontal() {
+//    	return this.horizontal;
+//	}
     
     //override methods
 
