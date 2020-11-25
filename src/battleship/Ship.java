@@ -22,7 +22,8 @@ public abstract class Ship {
     //public methods
     
     
-    // THIS ISN'T RIGHT, BUT I CAN'T FIGURE IT OUT RIGHT NOW, PLEASE REVISE.
+    // Update from  11/24: I think I fixed it. Please check when you have the chance
+    // Previous code has been left in but commented out - Ben
     public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
     	
     	int shipLength = this.length;
@@ -37,33 +38,46 @@ public abstract class Ship {
     		
     		this.horizontal = true;
     		
-    		for (int i = 0; i < shipLength; i++) {
-    			if (shipLength == 1) {
-    				shipArray[row][column - i] = new Submarine();
-    			} else if (shipLength == 2) {
-    				shipArray[row][column - i] = new Destroyer();
-    			} else if (shipLength == 3) {
-    				shipArray[row][column - i] = new Cruiser();
-    			} else  {
-    				shipArray[row][column - i] = new Battleship();
-    			}
+    		if (horizontal) {
+    			for (int i = 0; i < shipLength ; i++) {
+        			shipArray[row][column - i]  = this;
+        		};
+    		} else {
+    			for (int i = 0; i < shipLength ; i++) {
+        			shipArray[row - i][column]  = this;
+        		};
     		}
-    	
-    	//if vertical, put points, then -1 to row for length of ship	
-    	} else {
-    		this.horizontal = false;
-    		for (int i = 0; i < shipLength; i++) {
-    			if (shipLength == 1) {
-    				shipArray[row][column - i] = new Submarine();
-    			} else if (shipLength == 2) {
-    				shipArray[row][column - i] = new Destroyer();
-    			} else if (shipLength == 3) {
-    				shipArray[row][column - i] = new Cruiser();
-    			} else  {
-    				shipArray[row][column - i] = new Battleship();
-    			}
-    		}
+    		
+    		
     	}
+    		
+//    		for (int i = 0; i < shipLength; i++) {
+//    			if (shipLength == 1) {
+//    				shipArray[row][column - i] = new Submarine();
+//    			} else if (shipLength == 2) {
+//    				shipArray[row][column - i] = new Destroyer();
+//    			} else if (shipLength == 3) {
+//    				shipArray[row][column - i] = new Cruiser();
+//    			} else  {
+//    				shipArray[row][column - i] = new Battleship();
+//    			}
+//    		}
+//    	
+//    	//if vertical, put points, then -1 to row for length of ship	
+//    	} else {
+//    		this.horizontal = false;
+//    		for (int i = 0; i < shipLength; i++) {
+//    			if (shipLength == 1) {
+//    				shipArray[row][column - i] = new Submarine();
+//    			} else if (shipLength == 2) {
+//    				shipArray[row][column - i] = new Destroyer();
+//    			} else if (shipLength == 3) {
+//    				shipArray[row][column - i] = new Cruiser();
+//    			} else  {
+//    				shipArray[row][column - i] = new Battleship();
+//    			}
+//    		}
+//    	}
     	
     	
     	
@@ -119,10 +133,6 @@ public abstract class Ship {
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
     	
         int shipLength = this.getLength();
-        
-        
-        
-        
         
         // CHECK THIS:
         // on end points (first and final points) runs isOccupied() in this order: Current point, one in front/behind, diagonal1, diagonal2, below, above
