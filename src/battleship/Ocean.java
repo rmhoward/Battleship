@@ -68,41 +68,8 @@ public class Ocean {
 //        
 //        int column;
         
-<<<<<<< HEAD
         //initializes boolean for checking grid suitability checking
         boolean noneOffGrid = false;
-=======
-        int column;
-
-        //place battleships
-        for (int i = 0; i < Ocean.NUM_BATTLESHIPS; i++) {
-            Ship battleship = new Battleship();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
-            horizontal = rand.nextInt(2) == 0 ? false : true;
-            while(!battleship.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
-                horizontal = rand.nextInt(2) == 0 ? false : true;
-            }
-            battleship.placeShipAt(row, column, horizontal, this);
-        }
-
-        //place cruisers
-        
-        for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
-            Ship cruiser = new Cruiser();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
-            horizontal = rand.nextInt(2) == 0 ? false : true;
-            while(!cruiser.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
-                horizontal = rand.nextInt(2) == 0 ? false : true;
-            }
-            cruiser.placeShipAt(row, column, horizontal, this);
-        }
->>>>>>> f13d036abb0045fa2982280f45aad11bc6fbc4b2
         
         //initialize boolean for checking location in relation to other  ships
         boolean locationOkay = false;
