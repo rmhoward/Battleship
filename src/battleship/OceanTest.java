@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-//package battleship;
+
+package battleship;
 //
 //import static org.junit.jupiter.api.Assertions.*;
 //
@@ -222,7 +222,7 @@
 //	}
 //
 //}
-=======
+
 package battleship;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -508,4 +508,3 @@ class OceanTest {
 	}
 
 }
->>>>>>> f13d036abb0045fa2982280f45aad11bc6fbc4b2

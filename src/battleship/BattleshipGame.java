@@ -11,8 +11,7 @@ public class BattleshipGame {
 	 */
 	public static void main(String[] args) {
 		Ocean ocean = new Ocean();
-		
-<<<<<<< HEAD
+
 		ocean.print();
 		
 		
@@ -97,9 +96,7 @@ public class BattleshipGame {
 //		}
 		
 		
-		
-		
-=======
+
 		ocean.placeAllShipsRandomly();
 
 		Scanner scanner = new Scanner(System.in);
@@ -142,8 +139,6 @@ public class BattleshipGame {
 				System.out.println(e.getMessage());
 			} 
 		}
->>>>>>> f13d036abb0045fa2982280f45aad11bc6fbc4b2
 	}
 	
 }
-

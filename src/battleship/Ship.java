@@ -82,14 +82,56 @@ public abstract class Ship {
     	
     }
 
+	/**
+	 * Mark ship as hit if they are in the given row and column of the hit array, as long as they are not sunk
+	 * @param row location to shoot at
+	 * @param column location to shoot at
+	 * @return
+	 */
     public boolean shootAt(int row, int column) {
+    	if (!this.isSunk()) {
+    		int shipSpaceCount = 0;
+    		if (this.isHorizontal()) {
+    			int stern = this.getBowColumn() - (this.getLength()-1);
+    			if (row == this.getBowRow()) {
+    				for (int i = this.getBowColumn(); i >= stern; i--) {
+    					if (column == i) {
+    						shipSpaceCount = this.getBowColumn() - i;
+    						this.getHit()[shipSpaceCount] = true;
+    						return true;
+						}
+					}
+				}
+			} else if (!this.isHorizontal()) {
+				int stern = this.getBowRow() - (this.getLength() - 1);
+				if (column == this.getBowColumn()) {
+					for (int i = this.getBowRow(); i >= stern; i--) {
+						if (row == i) {
+							shipSpaceCount = this.getBowRow() - i;
+							this.getHit()[shipSpaceCount] = true;
+							return true;
+						}
+					}
+				}
+			}
+		}
+    	return false;
+    }
+
+	/**
+	 * Checks to see if all parts of a ship are hit
+	 * @return true if sunk
+	 */
+	public boolean isSunk() {
+		for (int i = 0; i <= this.getLength() - 1; i++) {
+			if (!this.getHit()[i]) {
+				return false;
+			}
+		}
     	return true;
     }
 
-    public boolean isSunk() {
-    	return true;
-    }
-    
+
     public boolean isHorizontal() {
     	if (this.horizontal == true) {
     		return true;
@@ -205,42 +247,81 @@ public abstract class Ship {
 
     
     //getters/setters
-    
-    public int getLength() {
-    	return length;
-    }
-    
-    public int getBowRow() {
-    	return bowRow;
+
+	/**
+	 * Returns length of ship
+	 * @return length
+	 */
+	public int getLength() {
+    	return this.length;
     }
 
-    public int getBowColumn() {
-    	return bowColumn;
+	/**
+	 * Returns row # of bow
+	 * @return bowRow
+	 */
+	public int getBowRow() {
+    	return this.bowRow;
     }
-    
+
+	/**
+	 * Returns column # of bow
+	 * @return bowColumn
+	 */
+    public int getBowColumn() {
+		return this.bowColumn;
+    }
+
+
     public boolean[] getHit() {
     	return hit;
     }
 
-    
+	/**
+	 * Sets row # of bow
+	 * @return row number to set row
+	 */
     public void setBowRow(int row) {
     	this.bowRow = row;
     }
 
+	/**
+	 * Returns column # of bow
+	 * @return column number to set column
+	 */
     public void setBowColumn(int column) {
     	this.bowColumn = column;
     }
 
-    public void setHorizontal(boolean horizontal) {
+
+	public void setHorizontal(boolean horizontal) {
     	this.horizontal = horizontal;
     }
-    
+
+
+	/**
+	 * Returns whether or not ship is horizontal
+	 * @param true if horizontal, otherwise false
+	 */
+//    public boolean isHorizontal() {
+//    	return this.horizontal;
+//	}
     
     //override methods
-    
-    @Override
+
+	/**
+	 * Overrides toString()
+	 * @return s if ship is sunk, x if ship is hit
+	 */
+	@Override
     public String toString() {
-    	return null;
+		String shipCharacter = "";
+		if (this.isSunk()) {
+			shipCharacter = "s";
+		} else {
+			shipCharacter = "x";
+		}
+    	return shipCharacter;
     }
 
 

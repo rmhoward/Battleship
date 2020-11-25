@@ -31,4 +31,3 @@ public class Destroyer extends Ship {
         return "Destroyer";
     }
 }
-
