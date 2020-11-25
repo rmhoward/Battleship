@@ -64,80 +64,135 @@ public class Ocean {
 
         Random rand = new Random();
         
-        int row;
+//        int row;
+//        
+//        int column;
         
-        int column;
+        //initializes boolean for checking grid suitability checking
+        boolean noneOffGrid = false;
+        
+        //initialize boolean for checking location in relation to other  ships
+        boolean locationOkay = false;
+        
+        //currently only checking for this battleship
+        Ship battleship = new Battleship();
+        
+        //loop boolean
+        boolean canPlace = false;
+        
+        //boolean for checking whether to place horizontal or vertical
+        boolean horizontal = false;
+        
+        //ONLY BEING USED FOR BATTLESHIP RIGHT NOW (still checking logic).
+        //while no suitable place has been found for the ship, it will run this loop to try and fit a battleship somewhere on the grid
+        //runs TWO checks - whether when the ship is placed, it is on the grid AND whether the location can mesh with other ships on the grid
+        //starts the first check with horizontal == false, or vertical
+        while (canPlace == false) {
+        	
+        	//all rows except  the  last  one
+        	int pRow = rand.nextInt(9) + 1;
+  
+        	//same as above with columns
+        	int pColumn = rand.nextInt(9) + 1;
+        	
+        	noneOffGrid = battleship.checkOffGrid(pRow, pColumn , horizontal, this);
+        	
+        	if (noneOffGrid) {
+        		locationOkay = battleship.okToPlaceShipAt(pRow, pColumn, horizontal, this);
+        		
+        		if (locationOkay) {
+        			battleship.placeShipAt(pRow, pColumn, horizontal, this);
+        			break;
+        		}
+        	}
+        	
+        	//if either of the checks above did not work, will switch the orientation of the ship to vertical and try again
+        	if (noneOffGrid == false || locationOkay == false) {
+        		horizontal = true;
+        		
+        		noneOffGrid = battleship.checkOffGrid(pRow, pColumn , horizontal, this);
+            	
+            	if (noneOffGrid) {
+            		locationOkay = battleship.okToPlaceShipAt(pRow, pColumn, horizontal, this);
+            		
+            		if (locationOkay) {
+            			battleship.placeShipAt(pRow, pColumn, horizontal, this);
+            			break;
+            		}
+            	}		
+        	}
+        }
+        
 
         //place battleships
-        for (int i = 0; i < Ocean.NUM_BATTLESHIPS; i++) {
-            Ship battleship = new Battleship();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
-            horizontal = rand.nextInt(2) == 0 ? false : true;
-            while(!battleship.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
-                horizontal = rand.nextInt(2) == 0 ? false : true;
-            }
-            battleship.placeShipAt(row, column, horizontal, this);
-        }
+//        for (int i = 0; i < Ocean.NUM_BATTLESHIPS; i++) {
+//            Ship battleship = new Battleship();
+//            row = rand.nextInt(10);
+//            column = rand.nextInt(10);
+//            horizontal = rand.nextInt(2) == 0 ? false : true;
+//            while(!battleship.okToPlaceShipAt(row, column, horizontal, this)) {
+//                row = rand.nextInt(10);
+//                column = rand.nextInt(10);
+//                horizontal = rand.nextInt(2) == 0 ? false : true;
+//            }
+//            battleship.placeShipAt(row, column, horizontal, this);
+//        }
 
         //place cruisers
-        
-        for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
-            Ship cruiser = new Cruiser();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
-            horizontal = rand.nextInt(2) == 0 ? false : true;
-            while(!cruiser.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
-                horizontal = rand.nextInt(2) == 0 ? false : true;
-            }
-            cruiser.placeShipAt(row, column, horizontal, this);
-        }
-        
-        for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
-            Ship cruiser2 = new Cruiser();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
-            horizontal = rand.nextInt(2) == 0 ? false : true;
-            while(!cruiser2.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
-                horizontal = rand.nextInt(2) == 0 ? false : true;
-            }
-            cruiser2.placeShipAt(row, column, horizontal, this);
-        }
-
-        //place destroyers
-        for (int i = 0; i < Ocean.NUM_DESTROYERS; i++) {
-            Ship destroyer = new Destroyer();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
-            horizontal = rand.nextInt(2) == 0 ? false : true;
-            while(!destroyer.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
-                horizontal = rand.nextInt(2) == 0 ? false : true;
-            }
-            destroyer.placeShipAt(row, column, horizontal, this);
-        }
-
-        //place submarines
-        for (int i = 0; i < Ocean.NUM_SUBMARINES; i++) {
-            Ship submarine = new Submarine();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
-            horizontal = rand.nextInt(2) == 0 ? false : true;
-            while(!submarine.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
-                horizontal = rand.nextInt(2) == 0 ? false : true;
-            }
-            submarine.placeShipAt(row, column, horizontal, this);
-        }
-        
+//        for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
+//            Ship cruiser = new Cruiser();
+//            row = rand.nextInt(10);
+//            column = rand.nextInt(10);
+//            horizontal = rand.nextInt(2) == 0 ? false : true;
+//            while(!cruiser.okToPlaceShipAt(row, column, horizontal, this)) {
+//                row = rand.nextInt(10);
+//                column = rand.nextInt(10);
+//                horizontal = rand.nextInt(2) == 0 ? false : true;
+//            }
+//            cruiser.placeShipAt(row, column, horizontal, this);
+//        }
+//        
+//        for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
+//            Ship cruiser2 = new Cruiser();
+//            row = rand.nextInt(10);
+//            column = rand.nextInt(10);
+//            horizontal = rand.nextInt(2) == 0 ? false : true;
+//            while(!cruiser2.okToPlaceShipAt(row, column, horizontal, this)) {
+//                row = rand.nextInt(10);
+//                column = rand.nextInt(10);
+//                horizontal = rand.nextInt(2) == 0 ? false : true;
+//            }
+//            cruiser2.placeShipAt(row, column, horizontal, this);
+//        }
+//
+//        //place destroyers
+//        for (int i = 0; i < Ocean.NUM_DESTROYERS; i++) {
+//            Ship destroyer = new Destroyer();
+//            row = rand.nextInt(10);
+//            column = rand.nextInt(10);
+//            horizontal = rand.nextInt(2) == 0 ? false : true;
+//            while(!destroyer.okToPlaceShipAt(row, column, horizontal, this)) {
+//                row = rand.nextInt(10);
+//                column = rand.nextInt(10);
+//                horizontal = rand.nextInt(2) == 0 ? false : true;
+//            }
+//            destroyer.placeShipAt(row, column, horizontal, this);
+//        }
+//
+//        //place submarines
+//        for (int i = 0; i < Ocean.NUM_SUBMARINES; i++) {
+//            Ship submarine = new Submarine();
+//            row = rand.nextInt(10);
+//            column = rand.nextInt(10);
+//            horizontal = rand.nextInt(2) == 0 ? false : true;
+//            while(!submarine.okToPlaceShipAt(row, column, horizontal, this)) {
+//                row = rand.nextInt(10);
+//                column = rand.nextInt(10);
+//                horizontal = rand.nextInt(2) == 0 ? false : true;
+//            }
+//            submarine.placeShipAt(row, column, horizontal, this);
+//        }
+//        
         
 
     }

@@ -19,7 +19,7 @@ public class Battleship extends Ship {
      * @return the Submarine length
      */
   
-    public Battleship(int length) {
+    public Battleship() {
     	
     	super(shipLength);
     }
