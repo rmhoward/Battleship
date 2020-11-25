@@ -50,7 +50,6 @@ public abstract class Ship {
     		
     		
     	}
-    		
 //    		for (int i = 0; i < shipLength; i++) {
 //    			if (shipLength == 1) {
 //    				shipArray[row][column - i] = new Submarine();
