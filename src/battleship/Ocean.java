@@ -43,7 +43,7 @@ public class Ocean {
     //Create ocean with no shots
 
     /**
-     * Adds emptysea (a subclass of Ship) to the Ocean
+     * Adds emptyOcean (a subclass of Ship) to the Ocean
      */
     private void populateEmptyOcean() {
         for (int i = 0; i < this.ships.length; i++) {
