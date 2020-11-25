@@ -18,7 +18,7 @@ public class Cruiser extends Ship {
      * @return the Submarine length
      */
 
-    public Cruiser(int length) {
+    public Cruiser() {
     	
     	super(shipLength);
 

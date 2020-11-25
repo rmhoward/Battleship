@@ -17,7 +17,7 @@ public class Submarine extends Ship {
      * @param the length of the Submarine
      * @return the Submarine length
      */
-	public Submarine(int length) {
+	public Submarine() {
     	
     	super(shipLength);
 

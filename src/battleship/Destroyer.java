@@ -17,8 +17,7 @@ public class Destroyer extends Ship {
      * @param the length of the Destroyer
      * @return the Submarine length
      */
-	 */
-    public Destroyer(int length) {
+    public Destroyer() {
     	
     	super(shipLength);
 
