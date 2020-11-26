@@ -48,8 +48,8 @@ public class Ocean {
     private void populateEmptyOcean() {
         for (int i = 0; i < this.ships.length; i++) {
             for (int j = 0; j < this.ships[i].length; j++) {
-                Ship ship = new EmptySea();
-                ship.placeShipAt(i, j, true, this);
+                ships[i][j] = new EmptySea();
+//                ship.placeShipAt(i, j, true, this);
             }
         }
     }
@@ -60,7 +60,7 @@ public class Ocean {
     /**
      * Randomly places all ships in the Ocean/GameBoard. 
      */
-    void placeAllShipsRandomly() {
+    public void placeAllShipsRandomly() {
 
         Random rand = new Random();
         
@@ -68,59 +68,196 @@ public class Ocean {
 //        
 //        int column;
         
-        //initializes boolean for checking grid suitability checking
-        boolean noneOffGrid = false;
-        
-        //initialize boolean for checking location in relation to other  ships
-        boolean locationOkay = false;
-        
-        //currently only checking for this battleship
-        Ship battleship = new Battleship();
-        
         //loop boolean
         boolean canPlace = false;
         
-        //boolean for checking whether to place horizontal or vertical
-        boolean horizontal = false;
-        
-        //ONLY BEING USED FOR BATTLESHIP RIGHT NOW (still checking logic).
-        //while no suitable place has been found for the ship, it will run this loop to try and fit a battleship somewhere on the grid
-        //runs TWO checks - whether when the ship is placed, it is on the grid AND whether the location can mesh with other ships on the grid
-        //starts the first check with horizontal == false, or vertical
+        //UPDATE 11/26 - Added all the ships, placement seems fine, however  there IS  problem with placement checking still
+        Ship battleship = new Battleship();
         while (canPlace == false) {
+        	this.horizontal = false;
+        	//all rows except  the  last  one
+        	int pRow = rand.nextInt(10);
+  
+        	//same as above with columns
+        	int pColumn = rand.nextInt(10);
         	
+        	canPlace = battleship.finalPlacement(pRow, pColumn, this.horizontal, this);
+
+        	//loop should exit before it gets here if horizontal works
+        	this.horizontal = true;
+        	
+        	canPlace = battleship.finalPlacement(pRow, pColumn, this.horizontal, this);
+        }
+        
+        Ship cruiser1 = new Cruiser();
+        canPlace = false;
+        
+        while (canPlace == false) {
+        	this.horizontal = false;
+        	//all rows except  the  last  one
+        	int pRow = rand.nextInt(10);
+  
+        	//same as above with columns
+        	int pColumn = rand.nextInt(10);
+        	
+        	canPlace = cruiser1.finalPlacement(pRow, pColumn, this.horizontal, this);
+
+        	//loop should exit before it gets here if horizontal works
+        	this.horizontal = true;
+        	
+        	canPlace = cruiser1.finalPlacement(pRow, pColumn, this.horizontal, this);
+        }
+        
+        Ship cruiser2 = new Cruiser();
+        canPlace = false;
+        
+        while (canPlace == false) {
+        	this.horizontal = false;
+        	//all rows except  the  last  one
+        	int pRow = rand.nextInt(10);
+  
+        	//same as above with columns
+        	int pColumn = rand.nextInt(10);
+        	
+        	canPlace = cruiser2.finalPlacement(pRow, pColumn, this.horizontal, this);
+
+        	//loop should exit before it gets here if horizontal works
+        	this.horizontal = true;
+        	
+        	canPlace = cruiser2.finalPlacement(pRow, pColumn, this.horizontal, this);
+        }
+        
+        Ship destroyer1 = new Destroyer();
+        canPlace = false;
+        
+        while (canPlace == false) {
+        	this.horizontal = false;
+        	//all rows except  the  last  one
+        	int pRow = rand.nextInt(10);
+  
+        	//same as above with columns
+        	int pColumn = rand.nextInt(10);
+        	
+        	canPlace = destroyer1.finalPlacement(pRow, pColumn, this.horizontal, this);
+
+        	//loop should exit before it gets here if horizontal works
+        	this.horizontal = true;
+        	
+        	canPlace = destroyer1.finalPlacement(pRow, pColumn, this.horizontal, this);
+        }
+        
+        Ship destroyer2 = new Destroyer();
+        canPlace = false;
+        
+        while (canPlace == false) {
+        	this.horizontal = false;
         	//all rows except  the  last  one
         	int pRow = rand.nextInt(9) + 1;
   
         	//same as above with columns
         	int pColumn = rand.nextInt(9) + 1;
         	
-        	noneOffGrid = battleship.checkOffGrid(pRow, pColumn , horizontal, this);
+        	canPlace = destroyer2.finalPlacement(pRow, pColumn, this.horizontal, this);
+
+        	//loop should exit before it gets here if horizontal works
+        	this.horizontal = true;
         	
-        	if (noneOffGrid) {
-        		locationOkay = battleship.okToPlaceShipAt(pRow, pColumn, horizontal, this);
-        		
-        		if (locationOkay) {
-        			battleship.placeShipAt(pRow, pColumn, horizontal, this);
-        			break;
-        		}
-        	}
+        	canPlace = destroyer2.finalPlacement(pRow, pColumn, this.horizontal, this);
+        }
+        
+        Ship destroyer3 = new Destroyer();
+        canPlace = false;
+        
+        while (canPlace == false) {
+        	this.horizontal = false;
+        	//all rows except  the  last  one
+        	int pRow = rand.nextInt(9) + 1;
+  
+        	//same as above with columns
+        	int pColumn = rand.nextInt(9) + 1;
         	
-        	//if either of the checks above did not work, will switch the orientation of the ship to vertical and try again
-        	if (noneOffGrid == false || locationOkay == false) {
-        		horizontal = true;
-        		
-        		noneOffGrid = battleship.checkOffGrid(pRow, pColumn , horizontal, this);
-            	
-            	if (noneOffGrid) {
-            		locationOkay = battleship.okToPlaceShipAt(pRow, pColumn, horizontal, this);
-            		
-            		if (locationOkay) {
-            			battleship.placeShipAt(pRow, pColumn, horizontal, this);
-            			break;
-            		}
-            	}		
-        	}
+        	canPlace = destroyer3.finalPlacement(pRow, pColumn, this.horizontal, this);
+
+        	//loop should exit before it gets here if horizontal works
+        	this.horizontal = true;
+        	
+        	canPlace = destroyer3.finalPlacement(pRow, pColumn, this.horizontal, this);
+        }
+        
+        Ship submarine1 = new Submarine();
+        canPlace = false;
+        
+        while (canPlace == false) {
+        	this.horizontal = false;
+        	//all rows except  the  last  one
+        	int pRow = rand.nextInt(9) + 1;
+  
+        	//same as above with columns
+        	int pColumn = rand.nextInt(9) + 1;
+        	
+        	canPlace = submarine1.finalPlacement(pRow, pColumn, this.horizontal, this);
+
+        	//loop should exit before it gets here if horizontal works
+        	this.horizontal = true;
+        	
+        	canPlace = submarine1.finalPlacement(pRow, pColumn, this.horizontal, this);
+        }
+        
+        Ship submarine2 = new Submarine();
+        canPlace = false;
+        
+        while (canPlace == false) {
+        	this.horizontal = false;
+        	//all rows except  the  last  one
+        	int pRow = rand.nextInt(9) + 1;
+  
+        	//same as above with columns
+        	int pColumn = rand.nextInt(9) + 1;
+        	
+        	canPlace = submarine2.finalPlacement(pRow, pColumn, this.horizontal, this);
+
+        	//loop should exit before it gets here if horizontal works
+        	this.horizontal = true;
+        	
+        	canPlace = submarine2.finalPlacement(pRow, pColumn, this.horizontal, this);
+        }
+        
+        Ship submarine3 = new Submarine();
+        canPlace = false;
+        
+        while (canPlace == false) {
+        	this.horizontal = false;
+        	//all rows except  the  last  one
+        	int pRow = rand.nextInt(9) + 1;
+  
+        	//same as above with columns
+        	int pColumn = rand.nextInt(9) + 1;
+        	
+        	canPlace = submarine3.finalPlacement(pRow, pColumn, this.horizontal, this);
+
+        	//loop should exit before it gets here if horizontal works
+        	this.horizontal = true;
+        	
+        	canPlace = submarine3.finalPlacement(pRow, pColumn, this.horizontal, this);
+        }
+        
+        Ship submarine4 = new Submarine();
+        canPlace = false;
+        
+        while (canPlace == false) {
+        	this.horizontal = false;
+        	//all rows except  the  last  one
+        	int pRow = rand.nextInt(9) + 1;
+  
+        	//same as above with columns
+        	int pColumn = rand.nextInt(9) + 1;
+        	
+        	canPlace = submarine4.finalPlacement(pRow, pColumn, this.horizontal, this);
+
+        	//loop should exit before it gets here if horizontal works
+        	this.horizontal = true;
+        	
+        	canPlace = submarine4.finalPlacement(pRow, pColumn, this.horizontal, this);
         }
         
 
@@ -202,10 +339,19 @@ public class Ocean {
      * Function in support of random ship placement and hit detection of ships
      * @return whether the grid location is empty. 
      */
-    boolean isOccupied(int row, int column) {
+    public boolean isOccupied(int row, int column) {
+    	
     	Ship[][] shipArray = this.getShipArray();
-
-    	return !("empty".equals(shipArray[row][column].getShipType()));
+    	
+    	String check = shipArray[row][column].getShipType();
+    	
+    	if (check != "empty") {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    	
+//    	return !("empty".equals(shipArray[row][column].getShipType()));
     }
 
     /**
@@ -215,7 +361,7 @@ public class Ocean {
      * If a ship is sunk the isSunk method is called. 
      * @return returnVal (whether a ship was hit)
      */
-    boolean shootAt(int row, int column) {
+    public boolean shootAt(int row, int column) {
     	
     	boolean returnVal = false;
 
@@ -249,13 +395,13 @@ public class Ocean {
     /**
      * Hold the shots fired by a player. 
      */
-    int getShotsFired() {
+    public int getShotsFired() {
     	return this.shotsFired;
     }
     /**
      * Hold the number of hits a ship has taken. 
      */
-    int getHitCount() {
+    public int getHitCount() {
     	return this.hitCount;
     }
     
@@ -263,7 +409,7 @@ public class Ocean {
      * holds the list of ships sunk. 
      * @return ships sunk. 
      */
-    int getShipsSunk() {
+    public int getShipsSunk() {
     	return this.shipsSunk;
     }
 
@@ -272,7 +418,7 @@ public class Ocean {
      * Determines if the game is over by checking to see if all of the ships have been sunk. 
      * @return boolean of whether ships sunk is greater than or equal to the number of ocean grid locations. 
      */
-    boolean isGameOver() {
+    public boolean isGameOver() {
         return this.getShipsSunk() >= Ocean.OCEAN_SIZE;
     }
 
@@ -281,11 +427,11 @@ public class Ocean {
      * Prints the remaining ships. 
      * @return an array of the remaining ships. 
      */
-    Ship[][] getShipArray() {
+    public Ship[][] getShipArray() {
     	return this.ships;
     }
 
-    void print() {
+    public void print() {
 		for (int i = 0; i <= 10; i++) {
 			if (i == 0) {
 				System.out.print("  ");
@@ -306,5 +452,30 @@ public class Ocean {
 			System.out.println(' ');
 		}
     }
-
+    
+    public void debugPrint() {
+    	
+    	Ship[][] shipArray = this.getShipArray();
+    	
+    	
+    	for (int i = 0; i <= 10; i++) {
+			if (i == 0) {
+				System.out.print("  ");
+			} else if (i == 1) {
+				System.out.print(0 + "\t");
+			} else {
+				System.out.print(i-1 + "\t");
+			}
+			for (int j = 0; j < 10; j++) {
+				if (i == 0) {
+					System.out.print(j + "\t");
+				} else {
+					System.out.print(shipArray[i][j].getShipType() + " ");
+				}
+				
+				
+			}
+			System.out.println(' ');
+		} 
+    }
 }
