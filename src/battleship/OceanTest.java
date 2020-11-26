@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+//package battleship;
+=======
 
 package battleship;
+>>>>>>> a0d43c30af7168fbbdb559041ddf133b917b1c41
 //
 //import static org.junit.jupiter.api.Assertions.*;
 //
@@ -222,6 +226,8 @@ package battleship;
 //	}
 //
 //}
+<<<<<<< HEAD
+=======
 
 package battleship;
 
@@ -508,3 +514,4 @@ class OceanTest {
 	}
 
 }
+>>>>>>> a0d43c30af7168fbbdb559041ddf133b917b1c41

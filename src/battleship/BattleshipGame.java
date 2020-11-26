@@ -6,26 +6,22 @@ import java.util.Random;
 
 public class BattleshipGame {
 	
-	/**
-	 * Main function for Battleship game
-	 */
+	
 	public static void main(String[] args) {
 		Ocean ocean = new Ocean();
+<<<<<<< HEAD
+		
+=======
 
+>>>>>>> a0d43c30af7168fbbdb559041ddf133b917b1c41
 		ocean.print();
 		
+		System.out.println();
 		
-//		System.out.println(ocean.ships[1][1]);
+		ocean.placeAllShipsRandomly();
 		
-		Battleship battleship = new Battleship();
-		
-		System.out.println(battleship.isHorizontal());
-		
-		Random rand = new Random();
-		
-		int random = rand.nextInt(11) + 1;
-		
-		System.out.println(random);
+		ocean.debugPrint();
+	
 //		
 //		ocean.placeAllShipsRandomly();
 //
@@ -62,39 +58,13 @@ public class BattleshipGame {
 //			} 
 //		}
 		
-		int [][]array = new int[11][10];
 		
-		array[0][0] = 0;
 		
-		array[3][2] = 7;
-		array[3][3] = 7;
-		array[3][4] = 7;
-		array[3][5] = 7;
 		
-		System.out.println();
-		
-		String s = "\n";
-//		
-//		for (int i = 0; i <= 10; i++) {
-//			if (i == 0) {
-//				System.out.print("  ");
-//			} else if (i == 1) {
-//				System.out.print(0 + " ");
-//			} else {
-//				System.out.print(i-1 + " ");
-//			}
-//			for (int j = 0; j < 10; j++) {
-//				if (i == 0) {
-//					System.out.print(j + " ");
-//				} else {
-//					System.out.print("-" + " ");
-//				}
-//				
-//				
-//			}
-//			System.out.println(' ');
-//		}
-		
+<<<<<<< HEAD
+	}
+}
+=======
 		
 
 		ocean.placeAllShipsRandomly();
@@ -142,3 +112,4 @@ public class BattleshipGame {
 	}
 	
 }
+>>>>>>> a0d43c30af7168fbbdb559041ddf133b917b1c41
