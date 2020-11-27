@@ -47,7 +47,6 @@ public abstract class Ship {
         	};
     	}
     }
-<<<<<<< HEAD
     
     public boolean finalPlacement(int row, int column, boolean horizontal, Ocean ocean) {
     	
@@ -69,10 +68,7 @@ public abstract class Ship {
         }
         return false;
     }  
-    
-=======
 
->>>>>>> a0d43c30af7168fbbdb559041ddf133b917b1c41
 	/**
 	 * Mark ship as hit if they are in the given row and column of the hit array, as long as they are not sunk
 	 * @param row location to shoot at

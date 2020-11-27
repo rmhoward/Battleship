@@ -9,11 +9,7 @@ public class BattleshipGame {
 	
 	public static void main(String[] args) {
 		Ocean ocean = new Ocean();
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> a0d43c30af7168fbbdb559041ddf133b917b1c41
 		ocean.print();
 		
 		System.out.println();
@@ -60,11 +56,7 @@ public class BattleshipGame {
 		
 		
 		
-		
-<<<<<<< HEAD
-	}
-}
-=======
+
 		
 
 		ocean.placeAllShipsRandomly();
@@ -112,4 +104,3 @@ public class BattleshipGame {
 	}
 	
 }
->>>>>>> a0d43c30af7168fbbdb559041ddf133b917b1c41
