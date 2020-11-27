@@ -57,3 +57,4 @@ public class EmptySea extends Ship {
         return "-";
     }
 }
+
