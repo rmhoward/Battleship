@@ -4,14 +4,14 @@ package battleship;
  * Creates the Cruiser class which is an extenion of the Ship class
  */
 public class Cruiser extends Ship {
-	
-	/**
-	 * The shipLength is derived from the ship class. 
-	 * Cruiser has a shipLength of 3.
-	 * The bow will always face the right of the gameboard.
-	 */
 
-	private static final int shipLength = 3;
+    /**
+     * The shipLength is derived from the ship class.
+     * Cruiser has a shipLength of 3.
+     * The bow will always face the right of the gameboard.
+     */
+
+    private static final int shipLength = 3;
 
     /**
      * @param the length of the Cruiser
@@ -19,8 +19,8 @@ public class Cruiser extends Ship {
      */
 
     public Cruiser() {
-    	
-    	super(shipLength);
+
+        super(shipLength);
 
     }
 
