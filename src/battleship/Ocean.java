@@ -19,7 +19,7 @@ public class Ocean {
 
     //private vars
 
-    private Ship[][] ships = new Ship[Ocean.OCEAN_SIZE][Ocean.OCEAN_SIZE];
+    private Ship[][] ships = new Ship[Ocean.OCEAN_SIZE + 1][Ocean.OCEAN_SIZE];
 
     private int shotsFired;
 
@@ -245,22 +245,53 @@ public class Ocean {
         return this.ships;
     }
 
-    void print() {
-        //top left corner
-        System.out.print("  ");
-
-        //print column numbers
-        for (int i = 0; i < this.ships.length; i++) {
-            System.out.print(i + " ");
-        }
-        System.out.println("");
-
-        //print row numbers
-        Ship ship;
-        for (int i = 0; i < this.ships.length; i++) {
-            System.out.println(i + " ");
-        }
-        System.out.println("");
+    public void print() {
+		for (int i = 0; i <= 10; i++) {
+			if (i == 0) {
+				System.out.print("  ");
+			} else if (i == 1) {
+				System.out.print(0 + " ");
+			} else {
+				System.out.print(i-1 + " ");
+			}
+			for (int j = 0; j < 10; j++) {
+				if (i == 0) {
+					System.out.print(j + " ");
+				} else {
+					System.out.print(ships[i][j] + " ");
+				}
+				
+				
+			}
+			System.out.println(' ');
+		}
+    }
+    
+    
+	public void debugPrint() {
+	    	
+	    	Ship[][] shipArray = this.getShipArray();
+	    	
+	    	
+	    	for (int i = 0; i <= 10; i++) {
+				if (i == 0) {
+					System.out.print("  ");
+				} else if (i == 1) {
+					System.out.print(0 + "\t");
+				} else {
+					System.out.print(i-1 + "\t");
+				}
+				for (int j = 0; j < 10; j++) {
+					if (i == 0) {
+						System.out.print(j + "\t");
+					} else {
+						System.out.print(shipArray[i][j].getShipType() + " ");
+					}
+					
+					
+				}
+				System.out.println(' ');
+			} 
     }
 }
 
