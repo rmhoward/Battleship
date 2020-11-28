@@ -16,15 +16,48 @@ class ShipTest {
 	}
 
 	@Test
+	
+	//Tests length of Battleship
 	void testGetLength() {
 		ship = new Battleship();
 		assertEquals(4, ship.getLength());
+	
+	//Tests length of EmptySea
+	void testGetLength() {
+		ship = new EmptySea();
+		assertEquals(1, ship.getLength());
+	
+	//Tests length of Cruiser
+	void testGetLength() {
+		ship = new EmptySea();
+		assertEquals(3, ship.getLength());
 		
-		//TODO
-		//More tests
+	//Tests length of Destroyer
+	void testGetLength() {
+		ship = new EmptySea();
+		assertEquals(2, ship.getLength());
 	}
 
 	@Test
+	
+	//Tests GetBowRow for EmptySea
+	void testGetBowRow() {
+		Ship emptysea = new EmptySea();
+		int row = 0;
+		int column = 1;
+		boolean horizontal = true;
+		emptysea.placeShipAt(row, column, horizontal, ocean);
+		assertEquals(row, emptysea.getBowRow());
+	
+	//Tests GetBowRow for Battleship
+	void testGetBowRow() {
+		Ship battleship = new Battleship();
+		int row = 0;
+		int column = 4;
+		boolean horizontal = true;
+		battleship.placeShipAt(row, column, horizontal, ocean);
+		assertEquals(row, battleship.getBowRow());
+			
 	void testGetBowRow() {
 		Ship battleship = new Battleship();
 		int row = 0;
@@ -33,8 +66,13 @@ class ShipTest {
 		battleship.placeShipAt(row, column, horizontal, ocean);
 		assertEquals(row, battleship.getBowRow());
 		
-		//TODO
-		//More tests
+	void testGetBowRow() {
+		Ship battleship = new Battleship();
+		int row = 0;
+		int column = 4;
+		boolean horizontal = true;
+		battleship.placeShipAt(row, column, horizontal, ocean);
+		assertEquals(row, battleship.getBowRow());
 	}
 
 	@Test
