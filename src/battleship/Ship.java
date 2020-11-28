@@ -1,5 +1,7 @@
 package battleship;
 
+import java.util.Arrays;
+
 public abstract class Ship {
 
     //instance vars
@@ -412,14 +414,16 @@ public abstract class Ship {
     @Override
     public String toString() {
         String shipCharacter = "-";
-        if (this.isSunk()) {
-            shipCharacter = "s";
-        } else {
+
+//        if (Arrays.asList(hit).contains(true)) {
+//            shipCharacter = "x";
+        if (!this.isSunk()) {
             shipCharacter = "x";
+        } else if (this.isSunk()) {
+            shipCharacter = "s";
         }
         return shipCharacter;
     }
-
 
 }
 
