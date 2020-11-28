@@ -98,20 +98,6 @@ public class Ocean {
             cruiser.placeShipAt(row, column, horizontal, this);
         }
 
-        //place cruisers
-        for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
-            Ship cruiser2 = new Cruiser();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
-            horizontal = rand.nextInt(2) == 0 ? false : true;
-            while (!cruiser2.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
-                horizontal = rand.nextInt(2) == 0 ? false : true;
-            }
-            cruiser2.placeShipAt(row, column, horizontal, this);
-        }
-
         //place destroyers
         for (int i = 0; i < Ocean.NUM_DESTROYERS; i++) {
             Ship destroyer = new Destroyer();
@@ -250,9 +236,9 @@ public class Ocean {
 			if (i == 0) {
 				System.out.print("  ");
 			} else if (i == 1) {
-				System.out.print(0 + " ");
+				System.out.print(1 + " ");
 			} else {
-				System.out.print(i-1 + " ");
+				System.out.print(i + " ");
 			}
 			for (int j = 0; j < 10; j++) {
 				if (i == 0) {
