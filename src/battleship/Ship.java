@@ -217,6 +217,118 @@ public abstract class Ship {
                         }
                     }
                 }
+            } else {
+            	int stern = row - (shipLength-1);
+                if (stern < 0) {
+                    return false;
+                }
+
+                //check around ship for adjacent ships
+                for (int i = row; i >= stern; i--) {
+
+                    //check if another ship in same location
+                    if (!this.isEmpty(shipArray[i][column])) {
+                        return false;
+                    }
+
+                    //if bow
+                    if (i == row) {
+                        //adjacent to right
+                        if ((row + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+                            if (!this.isEmpty(shipArray[row+1][column])) {
+                                return false;
+                            }
+                        }
+                        //top
+                        if ((column - 1) >= 0) {
+
+                            //adjacent top right
+                            if ((i + 1) <= (Ocean.OCEAN_SIZE -1)) {
+                                if (!this.isEmpty(shipArray[i+1][column-1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent top
+                            if (!this.isEmpty(shipArray[i][column-1])) {
+                                return false;
+                            }
+                        }
+                        //bottom
+                        if ((column + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+
+                            //adjacent bottom right
+                            if ((i + 1) <= (Ocean.OCEAN_SIZE -1)) {
+                                if (!this.isEmpty(shipArray[i+1][column+1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent bottom
+                            if (!this.isEmpty(shipArray[i][column+1])) {
+                                return false;
+                            }
+                        }
+                    }
+                    //if stern
+                    if (i == stern) {
+
+                        //adjacent top
+                        if ((i-1) >= 0) {
+                            if(!this.isEmpty(shipArray[row][i-1])) {
+                                return false;
+                            }
+                        }
+
+                        //left
+                        if ((row-1) >= 0) {
+
+                            //adjacent top left
+                            if ((i-1) >= 0) {
+                                if (!this.isEmpty(shipArray[row-1][i-1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent left
+                            if (!this.isEmpty(shipArray[row-1][i])) {
+                                return false;
+                            }
+                        }
+
+                        //right
+                        if ((row+1) <= (Ocean.OCEAN_SIZE - 1)) {
+
+                            //adjacent top right
+                            if ((i - 1) >= 0) {
+                                if (!this.isEmpty(shipArray[row+1][i-1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent right
+                            if (!this.isEmpty(shipArray[row+1][i])) {
+                                return false;
+                            }
+                        }
+                    }
+                    //all other locations
+                    if ((i < column) && (i > stern)) {
+
+                        //adjacent left
+                        if ((row - 1) >= 0) {
+                            if (!this.isEmpty(shipArray[row-1][i])) {
+                                return false;
+                            }
+                        }
+                        //adjacent right
+                        if ((row + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+                            if (!this.isEmpty(shipArray[row+1][i])) {
+                                return false;
+                            }
+                        }
+                    }
+                }
             }
         return true;
         }
@@ -299,7 +411,7 @@ public abstract class Ship {
      */
     @Override
     public String toString() {
-        String shipCharacter = "";
+        String shipCharacter = "-";
         if (this.isSunk()) {
             shipCharacter = "s";
         } else {
@@ -310,3 +422,4 @@ public abstract class Ship {
 
 
 }
+
