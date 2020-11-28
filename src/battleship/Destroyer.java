@@ -12,12 +12,10 @@ public class Destroyer extends Ship {
 	 */
 	private static final int shipLength = 2;
 	
-	/**
     /**
      * @param the length of the Destroyer
      * @return the Submarine length
      */
-	 */
     public Destroyer(int length) {
     	
     	super(shipLength);
