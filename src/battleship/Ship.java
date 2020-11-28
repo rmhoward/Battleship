@@ -1,21 +1,43 @@
 package battleship;
 
+/**
+ * The Ship class is comprised of objects generated for the player to interact with on the Gameboar
+ * All of the ships and the EmptySea are subclasses of Ship
+ */
 public abstract class Ship {
 
 	//instance vars
 	
+	/**
+	 * BowRow is the x-axis location of the Ship instance's bow
+	 */
     private int bowRow;
 
+	/**
+	 * BowColumn is the y-axis location of the Ship instance's bow
+	 */
     private int bowColumn;
     
+    /**
+     * length is the number of locations the ship takes up.
+     */
     private int length;
 
+    /**
+     * Determins if the ship is placed horizontally or verticially. 
+     */
     private boolean horizontal;
 
+    /**
+     * Array of hits on a particular instance of a ship
+     */
     private boolean[] hit;
       
     //abstract methods
     
+    /**
+     * Provides the string of an instance of the ship. 
+     */
     public abstract String getShipType();   
     
     
@@ -23,6 +45,9 @@ public abstract class Ship {
     
     
     // THIS ISN'T RIGHT, BUT I CAN'T FIGURE IT OUT RIGHT NOW, PLEASE REVISE.
+    /**
+     * Places an instance of the ship on the gameboard
+     */
     public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
     	
     	int shipLength = this.length;
@@ -69,14 +94,23 @@ public abstract class Ship {
     	
     }
 
+    /**
+     * Initiates a shot at ship. 
+     */
     public boolean shootAt(int row, int column) {
     	return true;
     }
-
+    
+    /**
+     * Calls to see whether a ship has been successfuly sunk 
+     */
     public boolean isSunk() {
     	return true;
     }
     
+    /**
+     * Tests whether the ship is aligned on the gameboard horizontally. 
+     */
     public boolean isHorizontal() {
     	if (this.horizontal == true) {
     		return true;
@@ -87,6 +121,10 @@ public abstract class Ship {
     
     
     //HELPER METHOD TO CHECK IF IN GRID (tries to place in the grid, if a error is thrown OR the number , it will return false)
+    
+    /**
+     * Helper method to determine if a game activity occurs in grid (tries to place in the grid, if a error is thrown OR the number , it will return false)
+     */
     public boolean checkOffGrid(int row, int column, boolean horizontal, Ocean ocean) {
     	
     	
@@ -116,6 +154,9 @@ public abstract class Ship {
     	return true;
     }
     
+    /**
+     * Cheks if there is sufficient room to place a ship at a particular location. 
+     */
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
     	
         int shipLength = this.getLength();
