@@ -70,8 +70,8 @@ public class BattleshipGame {
 
         //Game over messages
         System.out.println(" ");
-        System.out.println("The game is over");
-        System.out.println("You fired " + ocean.getShotsFired() + " shots");
+        System.out.println("The game is over.");
+        System.out.println("You fired " + ocean.getShotsFired() + " shots.");
     }
 }
 
