@@ -13,6 +13,15 @@ public class BattleshipGame {
         Ocean ocean = new Ocean();
         ocean.placeAllShipsRandomly();
 
+        //Welcome messages and rules
+        System.out.println("WELCOME TO BATTLESHIP!");
+        System.out.println("Instructions: The computer (your nemesis) has placed 10 ships randomly on a 10x10 ocean. ");
+        System.out.println("There are 4 Submarines (length 1), 3 Destroyers (length 2), 2 Cruisers (length 3) and ");
+        System.out.println("1 Battleship (length 4). Aim your cannon at a space on the ocean and try to sink all of");
+        System.out.println("the ships. Your final score is how many shots you took to win the game.");
+        System.out.println(" ");
+
+
         //for debugging
         ocean.debugPrint();
 
@@ -22,7 +31,7 @@ public class BattleshipGame {
 
             ocean.print();
 
-            System.out.print("Enter row,column: ");
+            System.out.print("Enter row, column: ");
 
             String rowColPair = scanner.nextLine();
 
@@ -57,10 +66,12 @@ public class BattleshipGame {
                 //e.printStackTrace();
             }
         }
+        scanner.close();
+
         //Game over messages
-        System.out.println("The game is over");
-        System.out.println("Your score is " + ocean.getHitCount());
-        System.out.println("You made " + ocean.getShotsFired() + "shots");
+        System.out.println(" ");
+        System.out.println("The game is over.");
+        System.out.println("You fired " + ocean.getShotsFired() + " shots.");
     }
 }
 
