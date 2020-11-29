@@ -71,11 +71,11 @@ public class Ocean {
         for (int i = 0; i < Ocean.NUM_BATTLESHIPS; i++) {
             Ship battleship = new Battleship();
             row = rand.nextInt(6) + 4;
-            column = rand.nextInt(6) + 4;
+            column = rand.nextInt(10);
             horizontal = rand.nextInt(2) != 0;
             while (!battleship.okToPlaceShipAt(row, column, horizontal, this)) {
                 row = rand.nextInt(6) + 4;
-                column = rand.nextInt(6) + 4;
+                column = rand.nextInt(10);
                 horizontal = rand.nextInt(2) != 0;
             }
             battleship.placeShipAt(row, column, horizontal, this);
@@ -85,11 +85,11 @@ public class Ocean {
         for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
             Ship cruiser = new Cruiser();
             row = rand.nextInt(7) + 3;
-            column = rand.nextInt(7) + 3;
+            column = rand.nextInt(10);
             horizontal = rand.nextInt(2) != 0;
             while (!cruiser.okToPlaceShipAt(row, column, horizontal, this)) {
                 row = rand.nextInt(7) + 3;
-                column = rand.nextInt(7) + 3;
+                column = rand.nextInt(10);
                 horizontal = rand.nextInt(2) != 0;
             }
             cruiser.placeShipAt(row, column, horizontal, this);
@@ -99,11 +99,11 @@ public class Ocean {
         for (int i = 0; i < Ocean.NUM_DESTROYERS; i++) {
             Ship destroyer = new Destroyer();
             row = rand.nextInt(8) + 2;
-            column = rand.nextInt(8) + 2;
+            column = rand.nextInt(10);
             horizontal = rand.nextInt(2) != 0;
             while (!destroyer.okToPlaceShipAt(row, column, horizontal, this)) {
                 row = rand.nextInt(8) + 2;
-                column = rand.nextInt(8) + 2;
+                column = rand.nextInt(10);
                 horizontal = rand.nextInt(2) != 0;
             }
             destroyer.placeShipAt(row, column, horizontal, this);
@@ -113,11 +113,11 @@ public class Ocean {
         for (int i = 0; i < Ocean.NUM_SUBMARINES; i++) {
             Ship submarine = new Submarine();
             row = rand.nextInt(9) + 1;
-            column = rand.nextInt(9) + 1;
+            column = rand.nextInt(10);
             horizontal = rand.nextInt(2) != 0;
             while (!submarine.okToPlaceShipAt(row, column, horizontal, this)) {
                 row = rand.nextInt(9) + 1;
-                column = rand.nextInt(9) + 1;
+                column = rand.nextInt(10);
                 horizontal = rand.nextInt(2) != 0;
             }
             submarine.placeShipAt(row, column, horizontal, this);
