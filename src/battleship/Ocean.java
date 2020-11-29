@@ -67,9 +67,6 @@ public class Ocean {
         int column;
         boolean horizontal;
 
-        //loop boolean
-        boolean canPlace = false;
-
         //place battleships
         for (int i = 0; i < Ocean.NUM_BATTLESHIPS; i++) {
             Ship battleship = new Battleship();
@@ -231,27 +228,58 @@ public class Ocean {
         return this.ships;
     }
 
-    public void print() {
-		for (int i = 0; i <= 10; i++) {
-			if (i == 0) {
-				System.out.print("  ");
-			} else if (i == 1) {
-				System.out.print(1 + " ");
-			} else {
-				System.out.print(i + " ");
-			}
-			for (int j = 0; j < 10; j++) {
-				if (i == 0) {
-					System.out.print(j + " ");
-				} else {
-					System.out.print(ships[i][j] + " ");
-				}
-				
-				
-			}
-			System.out.println(' ');
-		}
+    void print() {
+      System.out.print("  ");
+
+      //print column numbers
+      for (int i = 0; i < this.ships.length-1; i++) {
+          System.out.print(i + " ");
+      }
+
+      System.out.println("");
+
+      //print row numbers
+      Ship ship;
+      for (int i = 0; i < this.ships.length-1; i++) {
+          System.out.print(i + " ");
+
+          //print ship values
+          for (int j = 0; j < this.ships[i].length; j++) {
+              ship = this.ships[i][j];
+
+              //if ship has been sunken or if location has ben shot at and ht or nothing found
+              if (ship.isSunk() || ship.getLocationHit(i,j)) {
+                  System.out.print(ship + " ");
+              }
+              else {
+                  System.out.print("." + " ");
+              }
+          }
+          System.out.println("");
+      }
     }
+
+//    public void print() {
+//		for (int i = 0; i <= 10; i++) {
+//			if (i == 0) {
+//				System.out.print("  ");
+//			} else if (i == 1) {
+//				System.out.print(1 + " ");
+//			} else {
+//				System.out.print(i + " ");
+//			}
+//			for (int j = 0; j < 10; j++) {
+//				if (i == 0) {
+//					System.out.print(j + " ");
+//				} else {
+//					System.out.print(ships[i][j] + " ");
+//				}
+//
+//
+//			}
+//			System.out.println(' ');
+//		}
+//    }
     
     
 	public void debugPrint() {
