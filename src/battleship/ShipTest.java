@@ -278,6 +278,7 @@ class ShipTest {
 		assertEquals(column, destroyer.getBowColumn());
     
   }
+	
   //Test to see whether the ship is aligned horizontally.
 	@Test
 	void testSetHorizontal() {
