@@ -171,6 +171,7 @@ public abstract class Ship {
         } catch (Exception e) {
             return false;
         }
+    return true;
     }
             /**
              * Checks to see if all parts of a ship are hit
