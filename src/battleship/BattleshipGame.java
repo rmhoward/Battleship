@@ -57,6 +57,7 @@ public class BattleshipGame {
                 //e.printStackTrace();
             }
         }
+        scanner.close();
         //Game over messages
         System.out.println("The game is over");
         System.out.println("Your score is " + ocean.getHitCount());
