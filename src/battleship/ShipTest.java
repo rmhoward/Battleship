@@ -189,15 +189,15 @@ class ShipTest {
 		//Test to see whether whether GetShipType returns the correct type.
 	void testGetShipType() {
 		ship = new Battleship();
-		assertEquals("battleship", ship.getShipType());
+		assertEquals("Battleship", ship.getShipType());
 
 		//Test to see whether whether GetShipType returns the correct type.
 		ship = new Destroyer();
-		assertEquals("destroyer", ship.getShipType());
+		assertEquals("Destroyer", ship.getShipType());
 
 		//Test to see whether whether GetShipType returns the correct type.
 		ship = new Cruiser();
-		assertEquals("cruiser", ship.getShipType());
+		assertEquals("Cruiser", ship.getShipType());
 
 		//Test to see whether whether GetShipType returns the correct type.
 		ship = new EmptySea();
