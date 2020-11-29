@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Java tests for the Javacript game.
  * Tests proper game initiation, board setup, and functioning of ships. 
- */
+ */ 
 class OceanTest {
 
 	Ocean ocean;
@@ -290,6 +290,7 @@ class OceanTest {
 	@Test
 	void testGetHitCount() {
 		
+		//Testing one hit on a destroyer
 		Destroyer destroyer = new Destroyer();
 		int row = 1;
 		int column = 5;
@@ -300,8 +301,39 @@ class OceanTest {
 		assertFalse(destroyer.isSunk());
 		assertEquals(1, ocean.getHitCount());
 		
-		//TODO
-		//More tests
+		//Testing two hits on a battleship
+		Destroyer battleship = new Battleship();
+		int row = 6;
+		int column = 6;
+		boolean horizontal = false;
+		battleship.placeShipAt(row, column, horizontal, ocean);
+		
+		assertTrue(ocean.shootAt(6, 6));
+		assertTrue(ocean.shootAt(7, 6));
+		assertFalse(battleship.isSunk());
+		assertEquals(3, ocean.getHitCount());
+		
+		//Testing one hit on emptysea. It shoudn't increment.
+		EmptySea emptysea = new EmptySea();
+		int row = 7;
+		int column = 7;
+		boolean horizontal = false;
+		emptysea.placeShipAt(row, column, horizontal, ocean);
+		
+		assertTrue(ocean.shootAt(7, 7));
+		assertFalse(emptysea.isSunk());
+		assertEquals(3, ocean.getHitCount());
+		
+		//Testing one hit on submarine. Should sink
+		Destroyer submarine = new Submarine();
+		int row = 5;
+		int column = 5;
+		boolean horizontal = false;
+		submarine.placeShipAt(row, column, horizontal, ocean);
+		
+		assertTrue(ocean.shootAt(5, 5));
+		assertFalse(submarine.isSunk());
+		assertEquals(3, ocean.getHitCount());
 	}
 	/**
 	 * Test to confirm whether the GestShipsSunk method works properly. 
