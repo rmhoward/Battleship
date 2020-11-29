@@ -88,7 +88,6 @@ public abstract class Ship {
      * @return hit or not
      */
     public boolean shootAt(int row, int column) {
-        isHit = false;
         if (!this.isSunk()) {
             int shipSpaceCount = 0;
             if (this.isHorizontal()) {
@@ -98,7 +97,6 @@ public abstract class Ship {
                         if (column == i) {
                             shipSpaceCount = this.getBowColumn() - i;
                             this.getHit()[shipSpaceCount] = true;
-                            isHit = true;
                             return true;
                         }
                     }
@@ -110,7 +108,6 @@ public abstract class Ship {
                         if (row == i) {
                             shipSpaceCount = this.getBowRow() - i;
                             this.getHit()[shipSpaceCount] = true;
-                            isHit = true;
                             return true;
                         }
                     }
@@ -232,6 +229,7 @@ public abstract class Ship {
                                     return false;
                                 }
                             }
+
                             //bottom
                             if ((row + 1) <= (Ocean.OCEAN_SIZE - 1)) {
 
@@ -251,51 +249,52 @@ public abstract class Ship {
                         //if stern
                         if (i == stern) {
 
-                            //adjacent top
+                            //adjacent left
                             if ((i-1) >= 0) {
-                                if(!this.isEmpty(shipArray[i-1][column])) {
+                                if(!this.isEmpty(shipArray[row][i-1])) {
                                     return false;
                                 }
                             }
 
-                            //left
-                            if ((column-1) >= 0) {
+                            //top
+                            if ((row-1) >= 0) {
 
                                 //adjacent top left
                                 if ((i-1) >= 0) {
-                                    if (!this.isEmpty(shipArray[i-1][column-1])) {
+                                    if (!this.isEmpty(shipArray[row-1][i-1])) {
                                         return false;
                                     }
                                 }
 
-                                //adjacent left
-                                if (!this.isEmpty(shipArray[i][column-1])) {
+                                //adjacent top
+                                if (!this.isEmpty(shipArray[row-1][i])) {
                                     return false;
                                 }
                             }
 
-                            //right
-                            if ((column + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+                            //bottom
+                            if ((row + 1) <= (Ocean.OCEAN_SIZE - 1)) {
 
-                                //adjacent top right
+                                //adjacent bottom left
                                 if ((i - 1) >= 0) {
-                                    if (!this.isEmpty(shipArray[i-1][column+1])) {
+                                    if (!this.isEmpty(shipArray[row+1][i-1])) {
                                         return false;
                                     }
                                 }
 
-                                //adjacent right
-                                if (!this.isEmpty(shipArray[i][column+1])) {
+                                //adjacent bottom
+                                if (!this.isEmpty(shipArray[row+1][i])) {
                                     return false;
                                 }
                             }
                         }
                         //all other locations
-                        if ((i < row) && (i > stern)) {
+                        if ((i < column) && (i > stern)) {
 
-                            //adjacent left
-                            if ((column - 1) >= 0) {
-                                if (!this.isEmpty(shipArray[i][column-1])) {
+                            //adjacent top
+                            //TODO FIX EVERYTHING BELOW HERE
+                            if ((row - 1) >= 0) {
+                                if (!this.isEmpty(shipArray[row-1][i])) {
                                     return false;
                                 }
                             }
@@ -423,7 +422,17 @@ public abstract class Ship {
                 return true;
             }
 
-
+    boolean getLocationHit (int row, int column) {
+                int shipSpaceCount = 0;
+                if (this.isHorizontal()) {
+                    shipSpaceCount = this.getBowColumn() - column;
+                    return this.getHit()[shipSpaceCount];
+                } else if (!this.isHorizontal()) {
+                    shipSpaceCount = this.getBowRow() - row;
+                    return this.getHit()[shipSpaceCount];
+                }
+                return false;
+    }
             //constructors
 
     public Ship(int length) {
@@ -503,14 +512,13 @@ public abstract class Ship {
              */
             @Override
             public String toString() {
-                String shipCharacter = "-";
-                if ((!this.isSunk()) && (isHit==true)) {
-                    shipCharacter = "x";
-                }
-                else if (this.isSunk()) {
+                String shipCharacter = "";
+                if (this.isSunk()) {
                     shipCharacter = "s";
                 }
-
+                else {
+                    shipCharacter = "x";
+                }
                 return shipCharacter;
             }
         }
