@@ -168,10 +168,14 @@ class OceanTest {
 	/**
 	 * Tests to ensure the ShootAt method is functioning properly. 
 	 * Places a Destroyer at a particular grid location
+	 * Then places an EmptySea
+	 * Then places a submarine that can be sunk in one shot
+	 * Then tests another cruiser that should not be sunk
 	 */
 	@Test
 	void testShootAt() {
-	
+		
+		//Tests whether a destroyer is hit - but not sunk after one hit
 		assertFalse(ocean.shootAt(0, 1));
 		
 		Destroyer destroyer = new Destroyer();
@@ -184,8 +188,44 @@ class OceanTest {
 		assertFalse(destroyer.isSunk());
 		assertTrue(ocean.shootAt(0, 5));
 		
-		//TODO
-		//More tests
+		//Tests ShootAt overides on Empty Sea
+		assertFalse(ocean.shootAt(6, 6));
+		
+		EmptySea emptysea = new EmptySea();
+		int row = 2;
+		int column = 6;
+		boolean horizontal = false;
+		emptysea.placeShipAt(row, column, horizontal, ocean);
+		
+		assertFalse(ocean.shootAt(2, 6));
+		assertFalse(emptysea.isSunk());
+		assertFalse(ocean.shootAt(1, 5));
+		
+		//Tests ShootAt works and sinks Submarine
+		assertFalse(ocean.shootAt(7, 1));
+		
+		Submarine submarine = new Submarine();
+		int row = 7;
+		int column = 1;
+		boolean horizontal = false;
+		submarine.placeShipAt(row, column, horizontal, ocean);
+		
+		assertTrue(ocean.shootAt(7, 1));
+		assertTrue(submarine.isSunk());
+		assertTrue(ocean.shootAt(7, 1));
+		
+		//Tests ShootAt works and doesn't sink Cruiser
+		assertFalse(ocean.shootAt(0, 1));
+		
+		Destroyer cruiser = new Cruiser();
+		int row = 0;
+		int column = 1;
+		boolean horizontal = false;
+		cruiser.placeShipAt(row, column, horizontal, ocean);
+		
+		assertTrue(ocean.shootAt(0, 1));
+		assertFalse(cruiser.isSunk());
+		assertTrue(ocean.shootAt(0, 5));
 	}
 	
 	/**
@@ -202,26 +242,47 @@ class OceanTest {
 		assertFalse(ocean.shootAt(9, 9));
 		assertEquals(4, ocean.getShotsFired());
 		
+		//Destroyer placed. Shots with the destoyer return True. 
 		Destroyer destroyer = new Destroyer();
 		int row = 1;
 		int column = 5;
 		boolean horizontal = false;
 		destroyer.placeShipAt(row, column, horizontal, ocean);
 		
+		//Submarine placed. Shots with the destoyer return True. 
 		Ship submarine = new Submarine();
 		row = 0;
 		column = 0;
 		horizontal = false;
 		submarine.placeShipAt(row, column, horizontal, ocean);
 		
+		//EmptySea placed. Shots with EmptySea return False. 
+		Ship emptysea = new EmptySea();
+		row = 9;
+		column = 9;
+		horizontal = false;
+		emptysea.placeShipAt(row, column, horizontal, ocean);
+		
+		//Destroyer Tests
 		assertTrue(ocean.shootAt(1, 5));
 		assertFalse(destroyer.isSunk());
 		assertTrue(ocean.shootAt(0, 5));
 		assertTrue(destroyer.isSunk());
 		assertEquals(6, ocean.getShotsFired());
 		
-		//TODO
-		//More tests
+		//Submarine Tests
+		assertTrue(ocean.shootAt(0, 0));
+		assertTrue(submarine.isSunk());
+		
+		//WHAT DOES THIS 7 REPRESENT? TOTAL SHOTS?
+		assertEquals(7, ocean.getShotsFired());
+		
+		//EmptySea Tests
+		assertTrue(ocean.shootAt(9, 9));
+		assertFalse(emptysea.isSunk());
+		assertEquals(8, ocean.getShotsFired());
+		
+		
 	}
 	/**
 	 * Test to determine whether the appropriate number of hits are attributed to a particular ship. 
