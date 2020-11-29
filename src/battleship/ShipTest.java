@@ -202,6 +202,8 @@ class ShipTest {
 		//Test to see whether whether GetShipType returns the correct type.
 		ship = new EmptySea();
 		assertEquals("EmptySea", ship.getShipType());
+		
+	}
 
 	@Test
   
@@ -239,6 +241,7 @@ class ShipTest {
 		assertEquals(column, destroyer.getBowColumn());
     
   }
+	
   //Test to see whether the ship is aligned horizontally.
 	@Test
 	void testSetHorizontal() {
