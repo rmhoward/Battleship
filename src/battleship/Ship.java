@@ -23,7 +23,7 @@ public abstract class Ship {
     /**
      * length is the number of locations the ship takes up.
      */
-    private int length;
+    private final int length;
 
     /**
      * Determins if the ship is placed horizontally or verticially. 
@@ -34,10 +34,10 @@ public abstract class Ship {
      * Array of hits on a particular instance of a ship
      */
 
-    private boolean[] hit;
+    private final boolean[] hit;
 
     //shows if ship has been hit at any point
-    private boolean isHit = false;
+    private final boolean isHit = false;
 
 
     //show if a ship is in a given location
@@ -118,58 +118,16 @@ public abstract class Ship {
     }
 
 
-    /**
-     * Calls to see whether a ship has been successfuly sunk 
-     */
-//    public boolean isSunk() {
-//        return true;
-//    }
 
     /**
-     * Tests whether the ship is aligned on the gameboard horizontally. 
+     * Returns whether or not ship is horizontal
+     * @return true if horizontal, otherwise false
      */
     public boolean isHorizontal() {
-        if (this.horizontal == true) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.horizontal;
     }
 
 
-    //HELPER METHOD TO CHECK IF IN GRID (tries to place in the grid, if a error is thrown OR the number , it will return false)
-
-    /**
-     * Helper method to determine if a game activity occurs in grid (tries to place in the grid, if a error is thrown OR the number , it will return false)
-     */
-    public boolean checkOffGrid(int row, int column, boolean horizontal, Ocean ocean) {
-
-
-        int shipLength = this.getLength();
-
-        try {
-            if (row == 0 || column == 0) {
-                return false;
-            } else if (horizontal) {
-                for (int i = 0; i < shipLength; i++) {
-                    column -= 1;
-                    if (column == 0) {
-                        return false;
-                    }
-                }
-            } else {
-                for (int i = 0; i < shipLength; i++) {
-                    row -= 1;
-                    if (row == 0) {
-                        return false;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            return false;
-        }
-    return true;
-    }
             /**
              * Checks to see if all parts of a ship are hit
              * @return true if sunk
@@ -495,13 +453,6 @@ public abstract class Ship {
             }
 
 
-            /**
-             * Returns whether or not ship is horizontal
-             * @return true if horizontal, otherwise false
-             */
-//            public boolean isHorizontal() {
-//                return this.horizontal;
-//            }
 
 
             //override methods
