@@ -1,4 +1,3 @@
-
 package battleship;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,19 +21,16 @@ class ShipTest {
 	void testGetLength() {
 		ship = new Battleship();
 		assertEquals(4, ship.getLength());
-  }
+    
 	//Tests length of EmptySea
-	void testGetLength() {
 		ship = new EmptySea();
 		assertEquals(1, ship.getLength());
-  }
+
 	//Tests length of Cruiser
-	void testGetLength() {
 		ship = new EmptySea();
 		assertEquals(3, ship.getLength());
-  }
+  
 	//Tests length of Destroyer
-	void testGetLength() {
 		ship = new EmptySea();
 		assertEquals(2, ship.getLength());
 	}
@@ -49,30 +45,24 @@ class ShipTest {
 		boolean horizontal = true;
 		emptysea.placeShipAt(row, column, horizontal, ocean);
 		assertEquals(row, emptysea.getBowRow());
-  }
-	
+
 	//Tests GetBowRow for Battleship
-	void testGetBowRow() {
 		Ship battleship = new Battleship();
 		int row = 0;
 		int column = 4;
 		boolean horizontal = true;
 		battleship.placeShipAt(row, column, horizontal, ocean);
 		assertEquals(row, battleship.getBowRow());
-  }
   
   //Tests GetBowRow for Cruiser
-	void testGetBowRow() {
 		Ship cruiser = new Cruiser();
 		int row = 0;
 		int column = 3;
 		boolean horizontal = true;
 		cruiser.placeShipAt(row, column, horizontal, ocean);
 		assertEquals(row, cruiser.getBowRow());
-  }
 
   //Tests GetBowRow for Destroyer
-	void testGetBowRow() {
 		Ship destroyer = new Destroyer();
 		int row = 0;
 		int column = 2;
@@ -93,10 +83,8 @@ class ShipTest {
 		battleship.setBowColumn(column);
 		assertEquals(column, battleship.getBowColumn());	
 		
-	}
   
   //Tests GetBowColumn for EmptySea
-	void testGetBowColumn() {
 		Ship emptysea = new EmptySea();
 		int row = 0;
 		int column = 1;
@@ -104,11 +92,8 @@ class ShipTest {
 		emptysea.placeShipAt(row, column, horizontal, ocean);
 		emptysea.setBowColumn(column);
 		assertEquals(column, emptysea.getBowColumn());	
-		
-	}
   
   //Tests GetBowColumn for Cruiser
-	void testGetBowColumn() {
 		Ship cruiser = new Cruiser();
 		int row = 0;
 		int column = 3;
@@ -117,10 +102,8 @@ class ShipTest {
 		crusier.setBowColumn(column);
 		assertEquals(column, cruiser.getBowColumn());	
 		
-	}
   
   //Tests GetBowColumn for Destroyer
-	void testGetBowColumn() {
 		Ship destroyer = new Destroyer();
 		int row = 0;
 		int column = 2;
@@ -131,7 +114,6 @@ class ShipTest {
 		
 	}
 
-
 	@Test
 	
   //Tests GetHit on Battleship
@@ -141,31 +123,22 @@ class ShipTest {
 		assertArrayEquals(hits, ship.getHit());
 		assertFalse(ship.getHit()[0]);
 		assertFalse(ship.getHit()[1]);
-
-	}
   
   //Tests GetHit on Destroyer
-  void testGetHit() {
 		ship = new Destroyer();
 		boolean[] hits = new boolean[2];
 		assertArrayEquals(hits, ship.getHit());
 		assertFalse(ship.getHit()[0]);
 		assertFalse(ship.getHit()[1]);
 
-	}
-
   //Tests GetHit on Cruiser
-  void testGetHit() {
 		ship = new Cruiser();
 		boolean[] hits = new boolean[3];
 		assertArrayEquals(hits, ship.getHit());
 		assertFalse(ship.getHit()[0]);
 		assertFalse(ship.getHit()[1]);
 
-	}
-  
   //Tests GetHit on Submarine
-  void testGetHit() {
 		ship = new Cruiser();
 		boolean[] hits = new boolean[1];
 		assertArrayEquals(hits, ship.getHit());
@@ -184,11 +157,8 @@ class ShipTest {
 		boolean horizontal = true;
 		battleship.placeShipAt(row, column, horizontal, ocean);
 		assertTrue(battleship.isHorizontal());
-    
-  }
   
    //Test whether the ship is aligned horizontally
-   void testIsHorizontal() {
 		Ship emptySea = new EmptySea();
 		int row = 0;
 		int column = 1;
@@ -196,22 +166,15 @@ class ShipTest {
 		emptysea.placeShipAt(row, column, horizontal, ocean);
 		assertTrue(emptysea.isHorizontal());
      
-   }
-     
    //Test whether Empty Sea is aligned horizontally. Should return False.
-   void testIsHorizontal() {
 		Ship emptysea = new EmptySea();
 		int row = 1;
 		int column = 0;
 		boolean horizontal = false;
 		emptysea.placeShipAt(row, column, horizontal, ocean);
-		assertFalse(emptysea.isHorizontal());
-     
-   }
-  
+		assertFalse(emptysea.isHorizontal());  
      
    //Test whether the ship is aligned horizontally. Should return False.
-   void testIsHorizontal() {
 		Ship destroyer = new Destroyer();
 		int row = 2;
 		int column = 0;
@@ -227,31 +190,19 @@ class ShipTest {
 	void testGetShipType() {
 		ship = new Battleship();
 		assertEquals("battleship", ship.getShipType());
-		
-	}
      
   //Test to see whether whether GetShipType returns the correct type. 
-	void testGetShipType() {
 		ship = new Destroyer();
 		assertEquals("destroyer", ship.getShipType());
-		
-	}
      
   //Test to see whether whether GetShipType returns the correct type. 
-	void testGetShipType() {
 		ship = new Cruiser();
 		assertEquals("cruiser", ship.getShipType());
 		
-	}     
-
   //Test to see whether whether GetShipType returns the correct type. 
-	void testGetShipType() {
 		ship = new EmptySea();
 		assertEquals("EmptySea", ship.getShipType());
 		
-	}  
-     
-
 	@Test
      
   //Test to see whether the SetBowRow function goes to the proper row. 
@@ -263,20 +214,15 @@ class ShipTest {
 		battleship.setBowRow(row);
 		assertEquals(row, battleship.getBowRow());
 		
-	}
   //Test to see whether the SetBowRow function goes to the proper row. 
-	void testSetBowRow() {
 		Ship cruiser = new Cruiser();
 		int row = 1;
 		int column = 3;
 		boolean horizontal = true;
 		cruiser.setBowRow(row);
 		assertEquals(row, cruiser.getBowRow());
-		
-  }
 
   //Test to see whether the SetBowRow function goes to the proper row. 
-	void testSetBowRow() {
 		Ship emptysea = new EmptySea();
 		int row = 5;
 		int column = 1;
@@ -284,10 +230,7 @@ class ShipTest {
 		emptysea.setBowRow(row);
 		assertEquals(row, emptysea.getBowRow());
 		
-	}
-     
   //Test to see whether the SetBowRow function goes to the proper row. 
-	void testSetBowRow() {
 		Ship submarine = new Battleship();
 		int row = 3;
 		int column = 2;
@@ -307,22 +250,16 @@ class ShipTest {
 		boolean horizontal = true;
 		battleship.setBowColumn(column);
 		assertEquals(column, battleship.getBowColumn());
-		
-	}
   
   //Test to see whether the SetBowColumn function goes to the proper column. 
-	void testSetBowColumn() {
 		Ship submarine = new Submarine();
 		int row = 0;
 		int column = 1;
 		boolean horizontal = true;
 		submarine.setBowColumn(column);
 		assertEquals(column, submarine.getBowColumn());
-    
-  }
   
   //Test to see whether the SetBowColumn function goes to the proper column. 
-	void testSetBowColumn() {
 		Ship cruiser = new Cruiser();
 		int row = 0;
 		int column = 3;
@@ -330,10 +267,7 @@ class ShipTest {
 		cruiser.setBowColumn(column);
 		assertEquals(column, cruiser.getBowColumn());
     
-  }
-  
   //Test to see whether the SetBowColumn function goes to the proper column. 
-	void testSetBowColumn() {
 		Ship destroyer = new Destroyer();
 		int row = 0;
 		int column = 4;
