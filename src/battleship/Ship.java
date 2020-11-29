@@ -1,5 +1,7 @@
 package battleship;
 
+import java.util.Arrays;
+
 /**
  * The Ship class is comprised of objects generated for the player to interact with on the Gameboar
  * All of the ships and the EmptySea are subclasses of Ship
@@ -31,9 +33,20 @@ public abstract class Ship {
     /**
      * Array of hits on a particular instance of a ship
      */
+
     private boolean[] hit;
-      
+
+    //shows if ship has been hit at any point
+    private boolean isHit = false;
+
+
+    //show if a ship is in a given location
+    private boolean isEmpty(Ship ship) {
+        return "empty".equals(ship.getShipType());
+    }
+
     //abstract methods
+
     
     /**
      * Provides the string of an instance of the ship. 
@@ -49,57 +62,64 @@ public abstract class Ship {
      * Places an instance of the ship on the gameboard
      */
     public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-    	
-    	int shipLength = this.length;
-    	
-    	Ship[][] shipArray = ocean.getShipArray();
-    	
-    	this.bowRow = row;
-		this.bowColumn = column;
-		
-		//if horizontal,  put point at row/column, then column -1 for length of ship
-    	if (horizontal) {
-    		
-    		this.horizontal = true;
-    		
-    		for (int i = 0; i < shipLength; i++) {
-    			if (shipLength == 1) {
-    				shipArray[row][column - i] = new Submarine();
-    			} else if (shipLength == 2) {
-    				shipArray[row][column - i] = new Destroyer();
-    			} else if (shipLength == 3) {
-    				shipArray[row][column - i] = new Cruiser();
-    			} else  {
-    				shipArray[row][column - i] = new Battleship();
-    			}
-    		}
-    	
-    	//if vertical, put points, then -1 to row for length of ship	
-    	} else {
-    		this.horizontal = false;
-    		for (int i = 0; i < shipLength; i++) {
-    			if (shipLength == 1) {
-    				shipArray[row][column - i] = new Submarine();
-    			} else if (shipLength == 2) {
-    				shipArray[row][column - i] = new Destroyer();
-    			} else if (shipLength == 3) {
-    				shipArray[row][column - i] = new Cruiser();
-    			} else  {
-    				shipArray[row][column - i] = new Battleship();
-    			}
-    		}
-    	}
-    	
-    	
-    	
+        this.setBowRow(row);
+        this.setBowColumn(column);
+        this.setHorizontal(horizontal);
+
+        int shipLength = this.getLength();
+        if (this.isHorizontal()) {
+            int stern = column - (shipLength - 1);
+            for (int i = column; i >= stern; i--) {
+                ocean.getShipArray()[row][i] = this;
+            }
+        } else if (!this.isHorizontal()) {
+            int stern = row - (shipLength - 1);
+            for (int i = row; i >= stern; i--) {
+                ocean.getShipArray()[i][column] = this;
+            }
+        }
     }
 
+
     /**
-     * Initiates a shot at ship. 
+     * Mark ship as hit if they are in the given row and column of the hit array, as long as they are not sunk
+     * @param row location to shoot at
+     * @param column location to shoot at
+     * @return hit or not
      */
     public boolean shootAt(int row, int column) {
-    	return true;
+        isHit = false;
+        if (!this.isSunk()) {
+            int shipSpaceCount = 0;
+            if (this.isHorizontal()) {
+                int stern = this.getBowColumn() - (this.getLength()-1);
+                if (row == this.getBowRow()) {
+                    for (int i = this.getBowColumn(); i >= stern; i--) {
+                        if (column == i) {
+                            shipSpaceCount = this.getBowColumn() - i;
+                            this.getHit()[shipSpaceCount] = true;
+                            isHit = true;
+                            return true;
+                        }
+                    }
+                }
+            } else if (!this.isHorizontal()) {
+                int stern = this.getBowRow() - (this.getLength() - 1);
+                if (column == this.getBowColumn()) {
+                    for (int i = this.getBowRow(); i >= stern; i--) {
+                        if (row == i) {
+                            shipSpaceCount = this.getBowRow() - i;
+                            this.getHit()[shipSpaceCount] = true;
+                            isHit = true;
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
+
     
     /**
      * Calls to see whether a ship has been successfuly sunk 
@@ -150,130 +170,345 @@ public abstract class Ship {
         	}
         } catch (Exception e) {
         	return false;
+
+    /**
+     * Checks to see if all parts of a ship are hit
+     * @return true if sunk
+     */
+    public boolean isSunk() {
+        for (int i = 0; i <= this.getLength() - 1; i++) {
+            if (!this.getHit()[i]) {
+                return false;
+            }
         }
-    	return true;
+        return true;
     }
+
     
     /**
-     * Cheks if there is sufficient room to place a ship at a particular location. 
+     * Checks if there is sufficient room to place a ship at a particular location. 
      */
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
-    	
-        int shipLength = this.getLength();
-        
-        
-        
-        
-        
-        // CHECK THIS:
-        // on end points (first and final points) runs isOccupied() in this order: Current point, one in front/behind, diagonal1, diagonal2, below, above
-        // on mid points runs isOccupied in this order: current point, below, above
-        if (horizontal) {
-        	for (int i = 0; i >= shipLength; i++) {
-        		if (i == 0) {
-        			if (ocean.isOccupied(row, column) || ocean.isOccupied(row, column + 1) || ocean.isOccupied(row - 1, column + 1) || ocean.isOccupied(row + 1, column + 1)|| ocean.isOccupied(row + 1, column) || ocean.isOccupied(row - 1, column)) {
-        				return false;
-        			} 
-        		} else if (i == shipLength) {
-        			if (ocean.isOccupied(row, column - shipLength + 1) || ocean.isOccupied(row, column - shipLength) || ocean.isOccupied(row + 1, column - shipLength) || ocean.isOccupied(row - 1, column - shipLength) ||  ocean.isOccupied(row + 1, column - shipLength + 1) || ocean.isOccupied(row - 1, column - shipLength + 1)) {
-        				return false;
-        			}
-        		} else {
-        			if (ocean.isOccupied(row, column - i) || ocean.isOccupied(row + 1, column - i) || ocean.isOccupied(row - 1, column - i)) {
-        				return false;
-        			}
-        		}
-        	}
-        
-        	// Vertical implementation.
-        	// on end points runs isOccupied() in following order: Current point, one above/below, diagonal1, diagonal2, right, left
-        	// on mid points runs isOccupied in this order: current point, right, left
-        } else {
-        	for (int i = 0; i >= shipLength; i++) {
-        		if (i == 0) {
-        			if (ocean.isOccupied(row, column) || ocean.isOccupied(row + 1, column) || ocean.isOccupied(row + 1, column - 1) || ocean.isOccupied(row + 1, column + 1)|| ocean.isOccupied(row, column + 1) || ocean.isOccupied(row, column - 1)) {
-        				return false;
-        			} 
-        		} else if (i == shipLength) {
-        			if (ocean.isOccupied(row  - shipLength + 1, column) || ocean.isOccupied(row  - shipLength, column) ||  ocean.isOccupied(row  - shipLength, column + 1) || ocean.isOccupied(row  - shipLength, column - 1) ||  ocean.isOccupied(row  - shipLength + 1, column + 1) || ocean.isOccupied(row - shipLength + 1, column - 1)) {
-        				return false;
-        			}
-        		} else {
-        			if (ocean.isOccupied(row - i, column) || ocean.isOccupied(row -i, column + 1) || ocean.isOccupied(row - i, column - 1)) {
-        				return false;
-        			}
-        		}
-        	}
-        }
-        
+
+            int shipLength = this.getLength();
+            Ship[][] shipArray = ocean.getShipArray();
+
+            if (horizontal) {
+                int stern = column - (shipLength-1);
+                if (stern < 0) {
+                    return false;
+                }
+
+                //check around ship for adjacent ships
+                for (int i = column; i >= stern; i--) {
+
+                    //check if another ship in same location
+                    if (!this.isEmpty(shipArray[row][i])) {
+                        return false;
+                    }
+
+                    //if bow
+                    if (i == column) {
+                        //adjacent to right
+                        if ((column + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+                            if (!this.isEmpty(shipArray[row][column+1])) {
+                                return false;
+                            }
+                        }
+                        //top
+                        if ((row - 1) >= 0) {
+
+                            //adjacent top right
+                            if ((i + 1) <= (Ocean.OCEAN_SIZE -1)) {
+                                if (!this.isEmpty(shipArray[row-1][i+1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent top
+                            if (!this.isEmpty(shipArray[row-1][i])) {
+                                return false;
+                            }
+                        }
+                        //bottom
+                        if ((row + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+
+                            //adjacent bottom right
+                            if ((i + 1) <= (Ocean.OCEAN_SIZE -1)) {
+                                if (!this.isEmpty(shipArray[row+1][i+1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent bottom
+                            if (!this.isEmpty(shipArray[row+1][i])) {
+                                return false;
+                            }
+                        }
+                    }
+                    //if stern
+                    if (i == stern) {
+
+                        //adjacent top
+                        if ((i-1) >= 0) {
+                            if(!this.isEmpty(shipArray[i-1][column])) {
+                                return false;
+                            }
+                        }
+
+                        //left
+                        if ((column-1) >= 0) {
+
+                            //adjacent top left
+                            if ((i-1) >= 0) {
+                                if (!this.isEmpty(shipArray[i-1][column-1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent left
+                            if (!this.isEmpty(shipArray[i][column-1])) {
+                                return false;
+                            }
+                        }
+
+                        //right
+                        if ((column + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+
+                            //adjacent top right
+                            if ((i - 1) >= 0) {
+                                if (!this.isEmpty(shipArray[i-1][column+1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent right
+                            if (!this.isEmpty(shipArray[i][column+1])) {
+                                return false;
+                            }
+                        }
+                    }
+                    //all other locations
+                    if ((i < row) && (i > stern)) {
+
+                        //adjacent left
+                        if ((column - 1) >= 0) {
+                            if (!this.isEmpty(shipArray[i][column-1])) {
+                                return false;
+                            }
+                        }
+                        //adjacent right
+                        if ((column + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+                            if (!this.isEmpty(shipArray[i][column + 1])) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            } else {
+            	int stern = row - (shipLength-1);
+                if (stern < 0) {
+                    return false;
+                }
+
+                //check around ship for adjacent ships
+                for (int i = row; i >= stern; i--) {
+
+                    //check if another ship in same location
+                    if (!this.isEmpty(shipArray[i][column])) {
+                        return false;
+                    }
+
+                    //if bow
+                    if (i == row) {
+                        //adjacent to right
+                        if ((row + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+                            if (!this.isEmpty(shipArray[row+1][column])) {
+                                return false;
+                            }
+                        }
+                        //top
+                        if ((column - 1) >= 0) {
+
+                            //adjacent top right
+                            if ((i + 1) <= (Ocean.OCEAN_SIZE -1)) {
+                                if (!this.isEmpty(shipArray[i+1][column-1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent top
+                            if (!this.isEmpty(shipArray[i][column-1])) {
+                                return false;
+                            }
+                        }
+                        //bottom
+                        if ((column + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+
+                            //adjacent bottom right
+                            if ((i + 1) <= (Ocean.OCEAN_SIZE -1)) {
+                                if (!this.isEmpty(shipArray[i+1][column+1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent bottom
+                            if (!this.isEmpty(shipArray[i][column+1])) {
+                                return false;
+                            }
+                        }
+                    }
+                    //if stern
+                    if (i == stern) {
+
+                        //adjacent top
+                        if ((i-1) >= 0) {
+                            if(!this.isEmpty(shipArray[row][i-1])) {
+                                return false;
+                            }
+                        }
+
+                        //left
+                        if ((row-1) >= 0) {
+
+                            //adjacent top left
+                            if ((i-1) >= 0) {
+                                if (!this.isEmpty(shipArray[row-1][i-1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent left
+                            if (!this.isEmpty(shipArray[row-1][i])) {
+                                return false;
+                            }
+                        }
+
+                        //right
+                        if ((row+1) <= (Ocean.OCEAN_SIZE - 1)) {
+
+                            //adjacent top right
+                            if ((i - 1) >= 0) {
+                                if (!this.isEmpty(shipArray[row+1][i-1])) {
+                                    return false;
+                                }
+                            }
+
+                            //adjacent right
+                            if (!this.isEmpty(shipArray[row+1][i])) {
+                                return false;
+                            }
+                        }
+                    }
+                    //all other locations
+                    if ((i < column) && (i > stern)) {
+
+                        //adjacent left
+                        if ((row - 1) >= 0) {
+                            if (!this.isEmpty(shipArray[row-1][i])) {
+                                return false;
+                            }
+                        }
+                        //adjacent right
+                        if ((row + 1) <= (Ocean.OCEAN_SIZE - 1)) {
+                            if (!this.isEmpty(shipArray[row+1][i])) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
         return true;
-//
-//        if (horizontal) {
-//            int stern = column - (shipLength - 1);
-//            if (stern < 0) {
-//                return false;
-//            }
-//
-//            if ((column + 1) <= (Ocean.OCEAN_SIZE - 1)) {
-//                if (!"empty".equals(shipArray[row][column+1].getShipType())) {
-//                    return false;
-//                }
-//            } if ((row - 1) >= 0) {
-//            	return true;
-//            	}
-//        }
-//		return false; 
-      } 
+        }
 
 
     //constructors
-    
+
     public Ship(int length) {
-    	this.length = length;
+        this.length = length;
 
-    	//set hit tracker to size 4
-    	this.hit = new boolean[4];
+        //set hit tracker to size 4
+        this.hit = new boolean[4];
     }
 
-    
+
     //getters/setters
-    
+
+    /**
+     * Returns length of ship
+     * @return length
+     */
     public int getLength() {
-    	return length;
+        return this.length;
     }
-    
+
+    /**
+     * Returns row # of bow
+     * @return bowRow
+     */
     public int getBowRow() {
-    	return bowRow;
+        return this.bowRow;
     }
 
+    /**
+     * Returns column # of bow
+     * @return bowColumn
+     */
     public int getBowColumn() {
-    	return bowColumn;
+        return this.bowColumn;
     }
-    
+
+
     public boolean[] getHit() {
-    	return hit;
+        return hit;
     }
 
-    
+    /**
+     * Sets row # of bow
+     */
     public void setBowRow(int row) {
-    	this.bowRow = row;
+        this.bowRow = row;
     }
 
+    /**
+     * Returns column # of bow
+     */
     public void setBowColumn(int column) {
-    	this.bowColumn = column;
+        this.bowColumn = column;
     }
+
 
     public void setHorizontal(boolean horizontal) {
-    	this.horizontal = horizontal;
+        this.horizontal = horizontal;
     }
-    
-    
+
+
+    /**
+     * Returns whether or not ship is horizontal
+     * @return true if horizontal, otherwise false
+     */
+   public boolean isHorizontal() {
+    	return this.horizontal;
+	}
+
+
     //override methods
-    
+
+    /**
+     * Overrides toString()
+     * @return s if ship is sunk, x if ship is hit
+     */
     @Override
     public String toString() {
-    	return null;
+        String shipCharacter = "-";
+        if ((!this.isSunk()) && (isHit==true)) {
+            shipCharacter = "x";
+        }
+        else if (this.isSunk()) {
+            shipCharacter = "s";
+        }
+
+        return shipCharacter;
     }
-
-
 }
+

@@ -1,4 +1,3 @@
-//
 package battleship;
 
 /**
@@ -6,22 +5,27 @@ package battleship;
  */
 public class Battleship extends Ship {
 
-	/**
-	 * The shipLength is derived from the ship class. 
-	 * Battleship has a shipLength of 4.
-	 * The bow will always face the right of the gameboard.
-	 */
-	private static final int shipLength = 4;
-	
+
+    /**
+     * The shipLength is derived from the ship class.
+     * Battleship has a shipLength of 4.
+     * The bow will always face the right of the gameboard.
+     */
+
+    private static final int shipLength = 4;
+
+
     /**
      * @param the length of the Submarine
      * @return the Submarine length
      */
-    public Battleship(int length) {
-    	
-    	super(shipLength);
+
+    public Battleship() {
+
+        super(shipLength);
+
     }
-    
+
     /**
      * Overrides the ship method to return "Battleship"
      */
