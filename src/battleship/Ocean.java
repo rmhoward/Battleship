@@ -73,12 +73,12 @@ public class Ocean {
         //place battleships
         for (int i = 0; i < Ocean.NUM_BATTLESHIPS; i++) {
             Ship battleship = new Battleship();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
+            row = rand.nextInt(6) + 4;
+            column = rand.nextInt(6) + 4;
             horizontal = rand.nextInt(2) == 0 ? false : true;
             while (!battleship.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
+                row = rand.nextInt(6) + 4;
+                column = rand.nextInt(6) + 4;
                 horizontal = rand.nextInt(2) == 0 ? false : true;
             }
             battleship.placeShipAt(row, column, horizontal, this);
@@ -87,12 +87,12 @@ public class Ocean {
         //place cruisers
         for (int i = 0; i < Ocean.NUM_CRUISERS; i++) {
             Ship cruiser = new Cruiser();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
+            row = rand.nextInt(7) + 3;
+            column = rand.nextInt(7) + 3;
             horizontal = rand.nextInt(2) == 0 ? false : true;
             while (!cruiser.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
+                row = rand.nextInt(7) + 3;
+                column = rand.nextInt(7) + 3;
                 horizontal = rand.nextInt(2) == 0 ? false : true;
             }
             cruiser.placeShipAt(row, column, horizontal, this);
@@ -101,12 +101,12 @@ public class Ocean {
         //place destroyers
         for (int i = 0; i < Ocean.NUM_DESTROYERS; i++) {
             Ship destroyer = new Destroyer();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
+            row = rand.nextInt(8) + 2;
+            column = rand.nextInt(8) + 2;
             horizontal = rand.nextInt(2) == 0 ? false : true;
             while (!destroyer.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
+                row = rand.nextInt(8) + 2;
+                column = rand.nextInt(8) + 2;
                 horizontal = rand.nextInt(2) == 0 ? false : true;
             }
             destroyer.placeShipAt(row, column, horizontal, this);
@@ -115,12 +115,12 @@ public class Ocean {
         //place submarines
         for (int i = 0; i < Ocean.NUM_SUBMARINES; i++) {
             Ship submarine = new Submarine();
-            row = rand.nextInt(10);
-            column = rand.nextInt(10);
+            row = rand.nextInt(9) + 1;
+            column = rand.nextInt(9) + 1;
             horizontal = rand.nextInt(2) == 0 ? false : true;
             while (!submarine.okToPlaceShipAt(row, column, horizontal, this)) {
-                row = rand.nextInt(10);
-                column = rand.nextInt(10);
+                row = rand.nextInt(9) + 1;
+                column = rand.nextInt(9) + 1;
                 horizontal = rand.nextInt(2) == 0 ? false : true;
             }
             submarine.placeShipAt(row, column, horizontal, this);
