@@ -201,10 +201,10 @@ class ShipTest {
 
 		//Test to see whether whether GetShipType returns the correct type.
 		ship = new EmptySea();
-		assertEquals("Empty", ship.getShipType());
+		assertEquals("empty", ship.getShipType());
 		
 	}
-
+	
 	@Test
   
   //Test to see whether the SetBowColumn function goes to the proper column. 
