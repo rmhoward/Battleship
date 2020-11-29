@@ -355,8 +355,6 @@ class OceanTest {
 		assertEquals(1, ocean.getHitCount());
 		assertEquals(0, ocean.getShipsSunk());
 		
-		//TODO
-		//More tests
 	}
 	
 	/**
