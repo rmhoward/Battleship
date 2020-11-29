@@ -2,23 +2,38 @@ package battleship;
 
 import java.util.Arrays;
 
+/**
+ * The Ship class is comprised of objects generated for the player to interact with on the Gameboar
+ * All of the ships and the EmptySea are subclasses of Ship
+ */
 public abstract class Ship {
 
-    //instance vars
-
-    //row that contains the bow of the ship
+	//instance vars
+	
+	/**
+	 * BowRow is the x-axis location of the Ship instance's bow
+	 */
     private int bowRow;
 
-    //column that contains the bow of the ship
+	/**
+	 * BowColumn is the y-axis location of the Ship instance's bow
+	 */
     private int bowColumn;
-
-    //length of the ship
+    
+    /**
+     * length is the number of locations the ship takes up.
+     */
     private int length;
 
-    //whether ship will be placed horizontally or vertically
+    /**
+     * Determins if the ship is placed horizontally or verticially. 
+     */
     private boolean horizontal;
 
-    //array of 4 booleans that show if that part of a ship was hit or not
+    /**
+     * Array of hits on a particular instance of a ship
+     */
+
     private boolean[] hit;
 
     //shows if ship has been hit at any point
@@ -32,12 +47,20 @@ public abstract class Ship {
 
     //abstract methods
 
-    public abstract String getShipType();
-
-
+    
+    /**
+     * Provides the string of an instance of the ship. 
+     */
+    public abstract String getShipType();   
+    
+    
     //public methods
-
-    //OKAY
+    
+    
+    // THIS ISN'T RIGHT, BUT I CAN'T FIGURE IT OUT RIGHT NOW, PLEASE REVISE.
+    /**
+     * Places an instance of the ship on the gameboard
+     */
     public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
         this.setBowRow(row);
         this.setBowColumn(column);
@@ -97,6 +120,57 @@ public abstract class Ship {
         return false;
     }
 
+    
+    /**
+     * Calls to see whether a ship has been successfuly sunk 
+     */
+    public boolean isSunk() {
+    	return true;
+    }
+    
+    /**
+     * Tests whether the ship is aligned on the gameboard horizontally. 
+     */
+    public boolean isHorizontal() {
+    	if (this.horizontal == true) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
+    
+    //HELPER METHOD TO CHECK IF IN GRID (tries to place in the grid, if a error is thrown OR the number , it will return false)
+    
+    /**
+     * Helper method to determine if a game activity occurs in grid (tries to place in the grid, if a error is thrown OR the number , it will return false)
+     */
+    public boolean checkOffGrid(int row, int column, boolean horizontal, Ocean ocean) {
+    	
+    	
+    	int shipLength = this.getLength();
+        
+        try {
+        	if (row ==  0 || column == 0) {
+        		return false;
+        	} else if (horizontal) {
+        		for (int i =  0; i < shipLength; i++) {
+        			column -= 1;
+        			if (column == 0) {
+        				return false;
+        			} 
+        		}
+        	} else {
+        		for (int i =  0; i < shipLength; i++) {
+        			row -= 1;
+        			if (row == 0) {
+        				return false;
+        			} 
+        		}
+        	}
+        } catch (Exception e) {
+        	return false;
+
     /**
      * Checks to see if all parts of a ship are hit
      * @return true if sunk
@@ -110,6 +184,10 @@ public abstract class Ship {
         return true;
     }
 
+    
+    /**
+     * Checks if there is sufficient room to place a ship at a particular location. 
+     */
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
 
             int shipLength = this.getLength();
