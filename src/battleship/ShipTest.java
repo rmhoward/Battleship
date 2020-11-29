@@ -201,7 +201,7 @@ class ShipTest {
 
 		//Test to see whether whether GetShipType returns the correct type.
 		ship = new EmptySea();
-		assertEquals("EmptySea", ship.getShipType());
+		assertEquals("Empty", ship.getShipType());
 		
 	}
 
