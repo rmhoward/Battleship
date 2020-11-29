@@ -754,5 +754,5 @@ class ShipTest {
 			emptysea.shootAt(5, 5);
 			assertEquals("empty", emptysea.toString()); 
 		}
-
+ 
 	}
