@@ -10,7 +10,8 @@ import org.junit.jupiter.api.Test;
 /**
  * Java tests for the Javacript game.
  * Tests proper game initiation, board setup, and functioning of ships. 
- */
+ * First iteration of variables is unnumbnered then it is 1... after. 
+ */ 
 class OceanTest {
 
 	Ocean ocean;
@@ -168,10 +169,14 @@ class OceanTest {
 	/**
 	 * Tests to ensure the ShootAt method is functioning properly. 
 	 * Places a Destroyer at a particular grid location
+	 * Then places an EmptySea
+	 * Then places a submarine that can be sunk in one shot
+	 * Then tests another cruiser that should not be sunk
 	 */
 	@Test
 	void testShootAt() {
-	
+		
+		//Tests whether a destroyer is hit - but not sunk after one hit
 		assertFalse(ocean.shootAt(0, 1));
 		
 		Destroyer destroyer = new Destroyer();
@@ -184,8 +189,44 @@ class OceanTest {
 		assertFalse(destroyer.isSunk());
 		assertTrue(ocean.shootAt(0, 5));
 		
-		//TODO
-		//More tests
+		//Tests ShootAt overides on Empty Sea
+		assertFalse(ocean.shootAt(6, 6));
+		
+		EmptySea emptysea = new EmptySea();
+		int row1 = 2;
+		int column1 = 6;
+		boolean horizontal1 = false;
+		emptysea.placeShipAt(row1, column1, horizontal1, ocean);
+		
+		assertFalse(ocean.shootAt(2, 6));
+		assertFalse(emptysea.isSunk());
+		assertFalse(ocean.shootAt(1, 5));
+		
+		//Tests ShootAt works and sinks Submarine
+		assertFalse(ocean.shootAt(7, 1));
+		
+		Submarine submarine = new Submarine();
+		int row2 = 7;
+		int column2 = 1;
+		boolean horizontal2 = false;
+		submarine.placeShipAt(row2, column2, horizontal2, ocean);
+		
+		assertTrue(ocean.shootAt(7, 1));
+		assertTrue(submarine.isSunk());
+		assertTrue(ocean.shootAt(7, 1));
+		
+		//Tests ShootAt works and doesn't sink Cruiser
+		assertFalse(ocean.shootAt(0, 1));
+		
+		Cruiser cruiser = new Cruiser();
+		int row3 = 0;
+		int column3 = 1;
+		boolean horizontal3 = false;
+		cruiser.placeShipAt(row, column, horizontal, ocean);
+		
+		assertTrue(ocean.shootAt(0, 1));
+		assertFalse(cruiser.isSunk());
+		assertTrue(ocean.shootAt(0, 5));
 	}
 	
 	/**
@@ -202,26 +243,47 @@ class OceanTest {
 		assertFalse(ocean.shootAt(9, 9));
 		assertEquals(4, ocean.getShotsFired());
 		
+		//Destroyer placed. Shots with the destoyer return True. 
 		Destroyer destroyer = new Destroyer();
 		int row = 1;
 		int column = 5;
 		boolean horizontal = false;
 		destroyer.placeShipAt(row, column, horizontal, ocean);
 		
+		//Submarine placed. Shots with the destoyer return True. 
 		Ship submarine = new Submarine();
 		row = 0;
 		column = 0;
 		horizontal = false;
 		submarine.placeShipAt(row, column, horizontal, ocean);
 		
+		//EmptySea placed. Shots with EmptySea return False. 
+		Ship emptysea = new EmptySea();
+		row = 9;
+		column = 9;
+		horizontal = false;
+		emptysea.placeShipAt(row, column, horizontal, ocean);
+		
+		//Destroyer Tests
 		assertTrue(ocean.shootAt(1, 5));
 		assertFalse(destroyer.isSunk());
 		assertTrue(ocean.shootAt(0, 5));
 		assertTrue(destroyer.isSunk());
 		assertEquals(6, ocean.getShotsFired());
 		
-		//TODO
-		//More tests
+		//Submarine Tests
+		assertTrue(ocean.shootAt(0, 0));
+		assertTrue(submarine.isSunk());
+		
+		//WHAT DOES THIS 7 REPRESENT? TOTAL SHOTS?
+		assertEquals(7, ocean.getShotsFired());
+		
+		//EmptySea Tests
+		assertTrue(ocean.shootAt(9, 9));
+		assertFalse(emptysea.isSunk());
+		assertEquals(8, ocean.getShotsFired());
+		
+		
 	}
 	/**
 	 * Test to determine whether the appropriate number of hits are attributed to a particular ship. 
@@ -229,6 +291,7 @@ class OceanTest {
 	@Test
 	void testGetHitCount() {
 		
+		//Testing one hit on a destroyer
 		Destroyer destroyer = new Destroyer();
 		int row = 1;
 		int column = 5;
@@ -239,8 +302,39 @@ class OceanTest {
 		assertFalse(destroyer.isSunk());
 		assertEquals(1, ocean.getHitCount());
 		
-		//TODO
-		//More tests
+		//Testing two hits on a battleship
+		Battleship battleship = new Battleship();
+		int row1 = 6;
+		int column1 = 6;
+		boolean horizontal1 = false;
+		battleship.placeShipAt(row1, column1, horizontal1, ocean);
+		
+		assertTrue(ocean.shootAt(6, 6));
+		assertTrue(ocean.shootAt(7, 6));
+		assertFalse(battleship.isSunk());
+		assertEquals(3, ocean.getHitCount());
+		
+		//Testing one hit on emptysea. It shoudn't increment.
+		EmptySea emptysea = new EmptySea();
+		int row2 = 7;
+		int column2 = 7;
+		boolean horizontal2 = false;
+		emptysea.placeShipAt(row2, column2, horizontal2, ocean);
+		
+		assertTrue(ocean.shootAt(7, 7));
+		assertFalse(emptysea.isSunk());
+		assertEquals(3, ocean.getHitCount());
+		
+		//Testing one hit on submarine. Should sink
+		Submarine submarine = new Submarine();
+		int row3 = 5;
+		int column3 = 5;
+		boolean horizontal3 = false;
+		submarine.placeShipAt(row3, column3, horizontal3, ocean);
+		
+		assertTrue(ocean.shootAt(5, 5));
+		assertFalse(submarine.isSunk());
+		assertEquals(3, ocean.getHitCount());
 	}
 	/**
 	 * Test to confirm whether the GestShipsSunk method works properly. 
@@ -251,6 +345,7 @@ class OceanTest {
 	@Test
 	void testGetShipsSunk() {
 		
+		//Testing one hit on a Destroyer. Should be zero ships sunk
 		Destroyer destroyer = new Destroyer();
 		int row = 1;
 		int column = 5;
@@ -261,9 +356,44 @@ class OceanTest {
 		assertFalse(destroyer.isSunk());
 		assertEquals(1, ocean.getHitCount());
 		assertEquals(0, ocean.getShipsSunk());
+	
+		//Testing one hit on submarine. Should sink
+		Submarine submarine = new Submarine();
+		int row1 = 5;
+		int column1 = 5;
+		boolean horizontal1 = false;
+		submarine.placeShipAt(row1, column1, horizontal1, ocean);
 		
-		//TODO
-		//More tests
+		assertTrue(ocean.shootAt(5, 5));
+		assertFalse(submarine.isSunk());
+		assertEquals(2, ocean.getHitCount());
+		assertEquals(1, ocean.getShipsSunk());
+		
+		//Testing one hit on EmptySea. Nothing sinks, no increment on hit count. 
+		EmptySea emptysea = new EmptySea();
+		int row2 = 6;
+		int column2 = 6;
+		boolean horizontal2 = false;
+		emptysea.placeShipAt(row2, column2, horizontal2, ocean);
+		
+		assertTrue(ocean.shootAt(5, 5));
+		assertFalse(emptysea.isSunk());
+		assertEquals(2, ocean.getHitCount());
+		assertEquals(1, ocean.getShipsSunk());
+		
+		//Testing three hits on Cruiser. Cruiser sinks, increment of 3 on hit count. 
+		Cruiser cruiser  = new Cruiser();
+		int row3 = 7;
+		int column3 = 7;
+		boolean horizontal3 = false;
+		cruiser.placeShipAt(row3, column3, horizontal3, ocean);
+		
+		assertTrue(ocean.shootAt(7, 7));
+		assertTrue(ocean.shootAt(7, 8));
+		assertTrue(ocean.shootAt(7, 9));
+		assertTrue(cruiser.isSunk());
+		assertEquals(5, ocean.getHitCount());
+		assertEquals(2, ocean.getShipsSunk());
 	}
 	
 	/**
@@ -278,8 +408,7 @@ class OceanTest {
 		
 		assertEquals("empty", shipArray[0][0].getShipType());
 		
-		//TODO
-		//More tests
+		//More tests ---What are we testing here?
 	}
 
 }
