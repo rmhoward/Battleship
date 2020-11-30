@@ -10,6 +10,12 @@ import java.util.Scanner;
 
 import java.util.Random;
 
+
+/**
+ * Main game class - Where all the game play happens.
+ * @author ben
+ *
+ */
 public class BattleshipGame {
 
     /**
@@ -21,6 +27,7 @@ public class BattleshipGame {
         
         boolean gameLoop = true;
         
+        //First loop for checking if game will be played anew
         while (gameLoop == true) { 
         	
             Ocean ocean = new Ocean();
@@ -35,12 +42,14 @@ public class BattleshipGame {
             System.out.println("the ships. Your final score is how many shots you took to win the game.");
             System.out.println(" ");
             
+            //Loop for each consecutive shot
 	        while (!ocean.isGameOver()) {
 	
 	            ocean.print();
 	            
 	            boolean shootCheck = true;
 	            
+	            //loop to check for valid inputs
 	            while (shootCheck == true) {
 	            	
 		            try {
@@ -96,6 +105,8 @@ public class BattleshipGame {
 	        
 	        boolean gameLoopCheck = false;
 	        
+	        //Loop to check whether the final repeat game has a valid input or not
+	        //Same as other assignments, if the user enters a response with y or n, will restart based on that first letter
 	        while (gameLoopCheck == false) {
 	        	try {
 			        String again = scanner.nextLine();

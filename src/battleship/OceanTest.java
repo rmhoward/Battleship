@@ -244,6 +244,9 @@ class OceanTest {
 	@Test
 	void testGetShotsFired() {
 		
+		//edge case 1 - no shots fired, so it should be 0
+		assertEquals(0, ocean.getShotsFired());
+		
 		//should be all false - no ships added yet
 		assertFalse(ocean.shootAt(0, 1));
 		assertFalse(ocean.shootAt(1, 0));
@@ -282,8 +285,6 @@ class OceanTest {
 		//Submarine Tests
 		assertTrue(ocean.shootAt(0, 0));
 		assertTrue(submarine.isSunk());
-		
-		//WHAT DOES THIS 7 REPRESENT? TOTAL SHOTS?
 		assertEquals(7, ocean.getShotsFired());
 		
 		//EmptySea Tests
@@ -291,6 +292,17 @@ class OceanTest {
 		assertFalse(emptysea.isSunk());
 		assertEquals(8, ocean.getShotsFired());
 		
+		assertFalse(ocean.shootAt(0, 0));
+		assertFalse(ocean.shootAt(0, 0));
+		assertFalse(ocean.shootAt(0, 0));
+		assertFalse(ocean.shootAt(0, 0));
+		assertFalse(ocean.shootAt(0, 0));
+		assertFalse(ocean.shootAt(0, 0));
+		assertFalse(ocean.shootAt(0, 0));
+		assertFalse(ocean.shootAt(0, 0));
+		
+		//edge case 2 - lots shots in the same place (that has a sunken ship)
+		assertEquals(16, ocean.getShotsFired());
 		
 	}
 	/**
@@ -322,7 +334,7 @@ class OceanTest {
 		assertFalse(battleship.isSunk());
 		assertEquals(3, ocean.getHitCount());
 		
-		//Testing one hit on emptysea. It shoudn't increment.
+		//Testing one hit on empty sea. It shouldn't increment.
 		EmptySea emptysea = new EmptySea();
 		int row2 = 7;
 		int column2 = 7;
@@ -421,6 +433,45 @@ class OceanTest {
 		assertEquals(OCEAN_SIZE, shipArray[0].length);
 		
 		assertEquals("empty", shipArray[0][0].getShipType());
+		
+		//common case 1
+		Ship destroyer = new Destroyer();
+		int row = 6;
+		int column = 9;
+		boolean horizontal = true;
+		destroyer.placeShipAt(row, column, horizontal, ocean);
+
+		assertTrue("destroyer" == shipArray[6][8].getShipType());
+		
+		//less common case
+		Ship battleship = new Battleship();
+		row = 2;
+		column = 6;
+		horizontal = true;
+		battleship.placeShipAt(row, column, horizontal, ocean);
+
+		assertTrue("battleship" == shipArray[2][3].getShipType());
+		
+		
+		//edge case 1
+		Ship submarine = new Submarine();
+		row = 0;
+		column = 0;
+		horizontal = true;
+		submarine.placeShipAt(row, column, horizontal, ocean);
+
+		assertTrue("submarine" == shipArray[0][0].getShipType());
+		
+		//edge case 2
+		Ship submarine2 = new Submarine();
+		row = 9;
+		column = 9;
+		horizontal = true;
+		submarine2.placeShipAt(row, column, horizontal, ocean);
+
+		assertTrue("submarine" == shipArray[9][9].getShipType());
+		
+		
 		
 	}
 
