@@ -1,3 +1,9 @@
+/*
+  Written by: Rachael Howard (82772985), Benjamin Thanyawatpokin (52147828),
+  and Christian Pearson ()
+  Sources: Recitation, office hours, and Piazza posts.
+ */
+
 package battleship;
 
 /**
@@ -18,10 +24,9 @@ public class Submarine extends battleship.Ship {
      * @return the Submarine length
      */
     public Submarine() {
-
         super(shipLength);
-
     }
+
 
     /**
      * Overrides the ship method to return "Submarine"

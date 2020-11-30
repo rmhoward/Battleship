@@ -1,3 +1,9 @@
+/*
+  Written by: Rachael Howard (82772985), Benjamin Thanyawatpokin (52147828),
+  and Christian Pearson ()
+  Sources: Recitation, office hours, and Piazza posts.
+ */
+
 package battleship;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -417,7 +423,6 @@ class OceanTest {
 		
 		assertEquals("empty", shipArray[0][0].getShipType());
 		
-		//More tests ---What are we testing here?
 	}
 
 }

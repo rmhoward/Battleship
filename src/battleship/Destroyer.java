@@ -1,3 +1,9 @@
+/*
+  Written by: Rachael Howard (82772985), Benjamin Thanyawatpokin (52147828),
+  and Christian Pearson ()
+  Sources: Recitation, office hours, and Piazza posts.
+ */
+
 package battleship;
 
 /**
@@ -12,16 +18,16 @@ public class Destroyer extends Ship {
      */
     private static final int shipLength = 2;
 
+
     /**
      /**
      * @param the length of the Destroyer
      * @return the Submarine length
      */
     public Destroyer() {
-
         super(shipLength);
-
     }
+
 
     /**
      * Overrides the ship method to return "Destroyer"

@@ -1,3 +1,9 @@
+/*
+  Written by: Rachael Howard (82772985), Benjamin Thanyawatpokin (52147828),
+  and Christian Pearson ()
+  Sources: Recitation, office hours, and Piazza posts.
+ */
+
 package battleship;
 
 /**
@@ -14,24 +20,24 @@ public class EmptySea extends Ship {
         super(1);
     }
 
-    //overrides shootAt if nothing was hit
 
     /**
      * Overrides shootAt method so any shot at a tile with Empty Sea returns false.
      * takes an int for the row of the grid location and a int for the column of the grid location.
+     * @return false always to indicate that nothing was hit
      */
     @Override
     public boolean shootAt(int row, int column) {
-
         //call shootAt from Ship to populate hit array if they shoot at empty sea
         super.shootAt(row,column);
-
         return false;
     }
+
 
     /**
      * Overrides isSunk method so any shot at a tile with Empty Sea returns false.
      * takes an int for the row of the grid location and a int for the column of the grid location.
+     * @return always false to indicate nothing was sunk
      */
     //overrides isSunk if nothing is sunk
     @Override
@@ -39,14 +45,6 @@ public class EmptySea extends Ship {
         return false;
     }
 
-    /**
-     * EmptySea returns a " " when there is a call for a particular ship.
-     */
-    //getters/setters
-    @Override
-    public String getShipType() {
-        return "empty";
-    }
 
     /**
      * EmptySea returns a "-" on the game board which represents a grid location with no ship.
@@ -56,5 +54,15 @@ public class EmptySea extends Ship {
     public String toString() {
         return "-";
     }
+
+
+    /**
+     * EmptySea returns a " " when there is a call for a particular ship.
+     */
+    @Override
+    public String getShipType() {
+        return "empty";
+    }
+
 }
 
