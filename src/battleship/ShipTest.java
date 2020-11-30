@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+//iterations of similar names in variables start with the #1
 class ShipTest {
 
 	Ocean ocean;
