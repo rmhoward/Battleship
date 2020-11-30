@@ -1,9 +1,8 @@
 /*
   Written by: Rachael Howard (82772985), Benjamin Thanyawatpokin (52147828),
-  and Christian Pearson ()
+  and Christian Pearson (86344425)
   Sources: Recitation, office hours, and Piazza posts.
  */
-
 package battleship;
 
 import static org.junit.jupiter.api.Assertions.*;
