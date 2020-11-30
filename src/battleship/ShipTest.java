@@ -26,15 +26,15 @@ class ShipTest {
 		ship = new EmptySea();
 		assertEquals(1, ship.getLength());
 
-		//Tests length of Cruiser
-		ship = new EmptySea();
+		//Tests length of Cruiser length 3
+		ship = new Cruiser();
 		assertEquals(3, ship.getLength());
 
-		//Tests length of Destroyer
-		ship = new EmptySea();
+		//Tests length of Destroyer length 2
+		ship = new Destroyer();
 		assertEquals(2, ship.getLength());
 	}
-
+	
 	@Test
 
 		//Tests GetBowRow for EmptySea
@@ -380,10 +380,10 @@ class ShipTest {
 			assertEquals("empty", ocean.getShipArray()[0][0].getShipType());
 			assertEquals(submarine, ocean.getShipArray()[5][4]);
 			
-			//Test method doesn't work when trying to place ships off grid. 
+			//Test method doesn't work when trying to place at edge of grid. 
 			Ship battleship2 = new Battleship();
-			int row2 = 11;
-			int column2 = 11;
+			int row2 = 9;
+			int column2 = 9;
 			boolean horizontal2 = true;
 			battleship2.placeShipAt(row2, column2, horizontal2, ocean);
 			assertEquals(row2, battleship2.getBowRow());
@@ -391,7 +391,7 @@ class ShipTest {
 			assertTrue(battleship2.isHorizontal());
 
 			assertEquals("empty", ocean.getShipArray()[0][0].getShipType());
-			assertEquals(battleship2, ocean.getShipArray()[11][11]);
+			assertEquals(battleship2, ocean.getShipArray()[9][9]);
 			
 			//Test method doesn't work when trying to place battleship on edge of gameboard
 			Ship battleship3 = new Battleship();
