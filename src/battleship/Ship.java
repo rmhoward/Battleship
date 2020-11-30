@@ -172,7 +172,7 @@ public abstract class Ship {
                                 }
                             }
                             //top
-                            if ((row - 1) >= 1) {
+                            if ((row - 1) >= 0) {
 
                                 //adjacent top right
                                 if ((i + 1) <= (Ocean.OCEAN_SIZE -1)) {
@@ -219,7 +219,7 @@ public abstract class Ship {
                             }
 
                             //top
-                            if ((row-1) >= 1) {
+                            if ((row-1) >= 0) {
 
                                 //adjacent top left
                                 if ((i-1) >= 0) {
@@ -255,7 +255,7 @@ public abstract class Ship {
 
                             //adjacent top
                             //TODO FIX EVERYTHING BELOW HERE
-                            if ((row - 1) >= 1) {
+                            if ((row - 1) >= 0) {
                                 if (!this.isEmpty(shipArray[row-1][i])) {
                                     return false;
                                 }
