@@ -26,15 +26,15 @@ class ShipTest {
 		ship = new EmptySea();
 		assertEquals(1, ship.getLength());
 
-		//Tests length of Cruiser
-		ship = new EmptySea();
+		//Tests length of Cruiser length 3
+		ship = new Cruiser();
 		assertEquals(3, ship.getLength());
 
-		//Tests length of Destroyer
-		ship = new EmptySea();
+		//Tests length of Destroyer length 2
+		ship = new Destroyer();
 		assertEquals(2, ship.getLength());
 	}
-
+	
 	@Test
 
 		//Tests GetBowRow for EmptySea
