@@ -1,3 +1,9 @@
+/*
+  Written by: Rachael Howard (82772985), Benjamin Thanyawatpokin (52147828),
+  and Christian Pearson ()
+  Sources: Recitation, office hours, and Piazza posts.
+ */
+
 package battleship;
 
 import java.util.Scanner;
@@ -28,10 +34,6 @@ public class BattleshipGame {
             System.out.println("1 Battleship (length 4). Aim your cannon at a space on the ocean and try to sink all of");
             System.out.println("the ships. Your final score is how many shots you took to win the game.");
             System.out.println(" ");
-
-
-            //for debugging
-//            ocean.debugPrint();
             
 	        while (!ocean.isGameOver()) {
 	
@@ -74,9 +76,8 @@ public class BattleshipGame {
 		                } else {
 		                    System.out.println("miss");
 		                }
-		                
-		                shootCheck = false;
-		                break;
+
+			            break;
 		
 		            } catch (Exception e) {
 		            	System.out.println("Enter a valid location or correctly format it.");
@@ -89,7 +90,8 @@ public class BattleshipGame {
 	        System.out.println(" ");
 	        System.out.println("The game is over.");
 	        System.out.println("You fired " + ocean.getShotsFired() + " shots.");
-	        
+
+	        //Check if player wants to play again
 	        System.out.println("Do you want to play again? Y/N");
 	        
 	        boolean gameLoopCheck = false;

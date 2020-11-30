@@ -1,3 +1,9 @@
+/*
+  Written by: Rachael Howard (82772985), Benjamin Thanyawatpokin (52147828),
+  and Christian Pearson ()
+  Sources: Recitation, office hours, and Piazza posts.
+ */
+
 package battleship;
 
 /**
@@ -11,7 +17,6 @@ public class Battleship extends Ship {
      * Battleship has a shipLength of 4.
      * The bow will always face the right of the gameboard.
      */
-
     private static final int shipLength = 4;
 
 
@@ -19,12 +24,10 @@ public class Battleship extends Ship {
      * @param the length of the Submarine
      * @return the Submarine length
      */
-
     public Battleship() {
-
         super(shipLength);
-
     }
+
 
     /**
      * Overrides the ship method to return "Battleship"
