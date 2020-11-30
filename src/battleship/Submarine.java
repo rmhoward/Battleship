@@ -28,6 +28,6 @@ public class Submarine extends battleship.Ship {
      */
     @Override
     public String getShipType() {
-        return "Submarine";
+        return "submarine";
     }
 }

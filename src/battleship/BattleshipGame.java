@@ -31,7 +31,7 @@ public class BattleshipGame {
 
 
             //for debugging
-            ocean.debugPrint();
+//            ocean.debugPrint();
             
 	        while (!ocean.isGameOver()) {
 	

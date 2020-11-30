@@ -1,7 +1,5 @@
 package battleship;
 
-import java.util.Arrays;
-
 /**
  * The Ship class is comprised of objects generated for the player to interact with on the Gameboar
  * All of the ships and the EmptySea are subclasses of Ship
