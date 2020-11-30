@@ -360,43 +360,70 @@ class ShipTest {
 
 			//place first ship
 			Battleship battleship1 = new Battleship();
-			int row = 5;
-			int column = 5;
+			int row = 0;
+			int column = 4;
 			boolean horizontal = true;
-			boolean ok = battleship1.okToPlaceShipAt(row, column, horizontal, ocean);
-			assertTrue(ok, "OK to place ship here.");
+			boolean ok1 = battleship1.okToPlaceShipAt(row, column, horizontal, ocean);
+			assertTrue(ok1, "OK to place ship here.");
 			battleship1.placeShipAt(row, column, horizontal, ocean);
 
-			//test second ship - 
-			Cruiser cruiser = new Cruiser();
-			int row1 = 6;
-			int column1 = 5;
-			boolean ok1 = cruiser.okToPlaceShipAt(row1, column1, horizontal, ocean);
-			assertFalse(ok1, "Not OK to place ship vertically adjacent below.");
+			//test second ship
+			Battleship battleship2 = new Battleship();
+			row = 1;
+			column = 4;
+			horizontal = true;
+			boolean ok2 = battleship2.okToPlaceShipAt(row, column, horizontal, ocean);
+			assertFalse(ok2, "Not OK to place ship vertically adjacent below.");
 			
 			//test third ship
+			//First, place a ship in an area where we can put a ship vertically above and to the left of it
+			Battleship battleship = new Battleship();
+			row = 5;
+			column = 6;
+			horizontal = true;
+			ok1 = battleship1.okToPlaceShipAt(row, column, horizontal, ocean);
+			assertTrue(ok1, "OK to place ship here.");
+			battleship.placeShipAt(row, column, horizontal, ocean);
+			
 			Battleship battleship3 = new Battleship();
 			int row2 = 4;
 			int column2 = 6;
 			boolean horizontal2 = false;
-			boolean ok2 = battleship3.okToPlaceShipAt(row2, column2, horizontal2, ocean);
-			assertFalse(ok2, "Not OK to place ship diagonally adjacent above.");
+			boolean ok3 = battleship3.okToPlaceShipAt(row2, column2, horizontal2, ocean);
+			assertFalse(ok3, "Not OK to place ship diagonally adjacent above.");
 			
 			//test fourth ship
 			Battleship battleship4 = new Battleship();
 			int row3 = 4;
 			int column3 = 4;
 			boolean horizontal3 = true;
-			boolean ok3 = battleship4.okToPlaceShipAt(row3, column3, horizontal3, ocean);
-			assertFalse(ok3, "Not OK to place ship horizontally adjacent above.");
+			boolean ok4 = battleship4.okToPlaceShipAt(row3, column3, horizontal3, ocean);
+			assertFalse(ok4, "Not OK to place ship horizontally adjacent above.");
 			
 			//testing fifth ship - vertical at the stern of the ship
 			Cruiser cruiser2 = new Cruiser();
 			row = 5;
-			column = 1;
+			column = 2;
 			horizontal = false;
-			boolean ok4 = cruiser2.okToPlaceShipAt(row1, column1, horizontal, ocean);
-			assertFalse(ok4, "Not OK to place ship vertically at the end of another ship.");
+			boolean ok5 = cruiser2.okToPlaceShipAt(row, column, horizontal, ocean);
+			assertFalse(ok5, "Not OK to place ship vertically at the end of another ship.");
+			
+			//testing near the top
+			//First, place a ship in an area where we can put a ship vertically above it
+			Battleship battleship5 = new Battleship();
+			row = 1;
+			column = 9;
+			horizontal = true;
+			ok1 = battleship5.okToPlaceShipAt(row, column, horizontal, ocean);
+			assertTrue(ok1, "OK to place ship here.");
+			battleship5.placeShipAt(row, column, horizontal, ocean);
+			
+			Cruiser cruiser3 = new Cruiser();
+			row = 0;
+			column = 8;
+			horizontal = true;
+			boolean ok = cruiser3.okToPlaceShipAt(row, column, horizontal, ocean);
+			assertFalse(ok, "Not OK to place ship horizontally adjacent above.");
 			
 
 		}
