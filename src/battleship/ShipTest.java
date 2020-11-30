@@ -11,7 +11,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-//iterations of similar names in variables start with the #1
+/**
+ * Test of all ship-related classes
+ * @author ben
+ *
+ */
 class ShipTest {
 
 	Ocean ocean;
@@ -24,7 +28,7 @@ class ShipTest {
 
 	@Test
 
-		//Tests length of Battleship
+		//Tests length of ALL ships (included emptySea) - included here instead of making other test files
 	void testGetLength() {
 		ship = new Battleship();
 		assertEquals(4, ship.getLength());
@@ -249,7 +253,7 @@ class ShipTest {
 
 	@Test
 
-		//Test to see whether whether GetShipType returns the correct type.
+		//Test ship type for ALL SHIPS - included here to avoid making more test files
 	void testGetShipType() {
 		ship = new Battleship();
 		assertEquals("battleship", ship.getShipType());
@@ -265,6 +269,10 @@ class ShipTest {
 		//Test to see whether whether GetShipType returns the correct type.
 		ship = new EmptySea();
 		assertEquals("empty", ship.getShipType());
+		
+		//Test to see whether whether GetShipType returns the correct type.
+		ship = new Submarine();
+		assertEquals("submarine", ship.getShipType());
 		
 	}
 	
@@ -310,7 +318,7 @@ class ShipTest {
 			submarine.setHorizontal(horizontal1);
 			assertFalse(submarine.isHorizontal());
 			
-			//Tests whether placing the ship off the gameboard returns False for isHorizontal
+			//Tests whether placing the ship off the game board returns False for isHorizontal
 			Ship destroyer = new Destroyer();
 			boolean horizontal2 = false;
 			destroyer.setHorizontal(horizontal2);
@@ -351,13 +359,39 @@ class ShipTest {
 			boolean ok2 = cruiser.okToPlaceShipAt(row2, column2, horizontal2, ocean);
 			assertTrue(ok2, "OK to place ship here.");
 			
+			//edge case - off-board orientation
+			
 			//test whether method prevents placing ships off the gameboard - edge case Bottom left of the grid
 			Ship battleship2 = new Battleship();
 			int row3 = 9;
 			int column3 = 0;
 			boolean horizontal3 = true;
 			boolean ok3 = battleship2.okToPlaceShipAt(row3, column3, horizontal3, ocean);
-			assertFalse(ok3, "OK to place ship here.");
+			assertFalse(ok3, "NOT OK to place ship here.");
+			
+			//edge case - false orientations at top right
+			Ship battleship3 = new Battleship();
+			row = 0;
+			column = 9;
+			horizontal = false;
+			ok = battleship3.okToPlaceShipAt(row, column, horizontal, ocean);
+			assertFalse(ok, "NOT OK to place ship here.");
+			
+			//edge case - false orientations at top left
+			Ship battleship4 = new Battleship();
+			row = 0;
+			column = 0;
+			horizontal = false;
+			ok = battleship4.okToPlaceShipAt(row, column, horizontal, ocean);
+			assertFalse(ok, "NOT OK to place ship here.");
+			
+			//edge case - false orientations in mid-left
+			Ship battleship5 = new Battleship();
+			row = 5;
+			column = 0;
+			horizontal = true;
+			ok = battleship5.okToPlaceShipAt(row, column, horizontal, ocean);
+			assertFalse(ok, "NOT OK to place ship here.");
 		}
 
 		@Test
@@ -461,30 +495,42 @@ class ShipTest {
 			assertEquals("empty", ocean.getShipArray()[0][0].getShipType());
 			assertEquals(submarine, ocean.getShipArray()[5][4]);
 			
-			//Test method doesn't work when trying to place at edge of grid. 
+			//Edge case - on the edge of the board - bottom right vertically placed
 			Ship battleship2 = new Battleship();
 			int row2 = 9;
 			int column2 = 9;
-			boolean horizontal2 = true;
+			boolean horizontal2 = false;
 			battleship2.placeShipAt(row2, column2, horizontal2, ocean);
-			assertEquals(row2, battleship2.getBowRow());
-			assertEquals(column2, battleship2.getBowColumn());
-			assertTrue(battleship2.isHorizontal());
-
-			assertEquals("empty", ocean.getShipArray()[0][0].getShipType());
+			assertEquals("battleship", ocean.getShipArray()[9][9].getShipType());
+			assertEquals("battleship", ocean.getShipArray()[8][9].getShipType());
+			assertEquals("battleship", ocean.getShipArray()[7][9].getShipType());
+			assertEquals("battleship", ocean.getShipArray()[6][9].getShipType());
 			assertEquals(battleship2, ocean.getShipArray()[9][9]);
 			
-			//Test method doesn't work when trying to place battleship on edge of gameboard
+			//Edge case - on the edge of the board - bottom right horizontally place
 			Ship battleship3 = new Battleship();
 			int row3 = 9;
 			int column3 = 9;
 			boolean horizontal3 = true;
 			battleship3.placeShipAt(row3, column3, horizontal3, ocean);
-			assertEquals(row3, battleship3.getBowRow());
-			assertEquals(column3, battleship3.getBowColumn());
-			assertTrue(battleship3.isHorizontal());
 
-			assertEquals("empty", ocean.getShipArray()[0][0].getShipType());
+			assertEquals("battleship", ocean.getShipArray()[9][9].getShipType());
+			assertEquals("battleship", ocean.getShipArray()[9][8].getShipType());
+			assertEquals("battleship", ocean.getShipArray()[9][7].getShipType());
+			assertEquals("battleship", ocean.getShipArray()[9][6].getShipType());
+			assertEquals(battleship3, ocean.getShipArray()[9][9]);
+			
+			//Edge case - on the edge of the board - top left placement vertically
+			Ship battleship4 = new Battleship();
+			row = 4;
+			column = 0;
+			horizontal = false;
+			battleship4.placeShipAt(row, column, horizontal, ocean);
+
+			assertEquals("battleship", ocean.getShipArray()[4][0].getShipType());
+			assertEquals("battleship", ocean.getShipArray()[3][0].getShipType());
+			assertEquals("battleship", ocean.getShipArray()[2][0].getShipType());
+			assertEquals("battleship", ocean.getShipArray()[1][0].getShipType());
 			assertEquals(battleship3, ocean.getShipArray()[9][9]);
 
 		}
@@ -541,7 +587,7 @@ class ShipTest {
 			boolean[] hitArray4 = {true, true, true, false};
 			assertArrayEquals(hitArray4, cruiser.getHit());
 
-			//test a battleship that has been sunk 
+			//Edge case - test a battleship that has been sunk 
 			Ship battleship1 = new Battleship();
 			int row = 9;
 			int column = 0;
@@ -685,14 +731,30 @@ class ShipTest {
 		
 			//Test if I hit empty sea overrides method and returns "empty"
 			Ship emptysea = new EmptySea();
-			assertEquals("s", submarine.toString());
+			assertEquals("-", emptysea.toString());
 
+			//tests if a shot at emptysea will still make the - symbol
 			int row3 = 8;
 			int column3 = 8;
 			boolean horizontal3 = false;
 			emptysea.placeShipAt(row3, column3, horizontal3, ocean);
 			emptysea.shootAt(5, 5);
 			assertEquals("-", emptysea.toString()); 
+			
+			//Minor edge case - tests transformation of X to S
+			Ship battleship1 = new Battleship();
+			row = 9;
+			column = 9;
+			horizontal = true;
+			battleship1.placeShipAt(row, column, horizontal, ocean);
+			battleship1.shootAt(9, 9);
+			assertEquals("x", battleship1.toString());
+			battleship1.shootAt(9, 8);
+			assertEquals("x", battleship1.toString());
+			battleship1.shootAt(9,7);
+			assertEquals("x", battleship1.toString());
+			battleship1.shootAt(9,6);
+			assertEquals("s", battleship1.toString());
 		}
  
 	}
