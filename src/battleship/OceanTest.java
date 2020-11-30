@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
  * First iteration of variables is unnumbnered then it is 1... after. 
  */ 
 class OceanTest {
-
+	
 	Ocean ocean;
 	static int NUM_BATTLESHIPS = 1;
 	static int NUM_CRUISERS = 2;
